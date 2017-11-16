@@ -13,4 +13,5 @@
 # Anmerkungen
 
 Mit dem folgenden Command kann ZSH als Standard-Shell festgelegt werden:
+	
 	chsh -s $(which zsh)
