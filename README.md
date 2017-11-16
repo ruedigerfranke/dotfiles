@@ -2,6 +2,7 @@
 
 	ln -s ~/myconfigurations/.zshrc ~/.zshrc
 	ln -s ~/myconfigurations/.gitconfig ~/.gitconfig
+	ln -s ~/myconfigurations/Preferences.sublime-settings "~/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings"
 
 
 # Zusatzliche verwendetet Symbolic Links
