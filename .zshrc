@@ -60,6 +60,10 @@ ZSH_THEME="ys"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  rails
+  ruby
+  rvm
+  sublime
 )
 
 source $ZSH/oh-my-zsh.sh
