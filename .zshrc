@@ -64,6 +64,7 @@ plugins=(
   ruby
   rvm
   sublime
+  wd
 )
 
 source $ZSH/oh-my-zsh.sh
