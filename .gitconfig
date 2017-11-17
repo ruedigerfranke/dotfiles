@@ -3,3 +3,5 @@
 [user]
 	name = Rüdiger Franke
 	email = mail@ruedigerfranke.net
+[core]
+	excludesfile = ~/.gitignore_global
