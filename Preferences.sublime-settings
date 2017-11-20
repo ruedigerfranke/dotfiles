@@ -1,28 +1,22 @@
 {
+	"always_show_minimap_viewport": true,
+	"bold_folder_labels": true,
 	"color_scheme": "Packages/Materialize/schemes/Material Spacegray.tmTheme",
-	"theme": "Material Spacegray.sublime-theme",
-
+	"font_face": "Menlo Bold",
+	"font_size": 13,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
-
-	"font_face": "Menlo Bold",
-	"font_size": 13,
-
-	"overlay_scroll_bars": "enabled",
-    "line_padding_top": 2,
-    "line_padding_bottom": 2,
-	"font_options": [ "gray_antialias" ], // For retina Mac
-    "always_show_minimap_viewport": true,
-    "bold_folder_labels": true,
-
-	"material_theme_accent_indigo": true, 
-	// "material_theme_appbar_charcoal": true,
+	"line_padding_bottom": 2,
+	"line_padding_top": 2,
+	"material_theme_accent_indigo": true,
 	"material_theme_bold_tab": true,
+	"material_theme_contrast_mode": true,
 	"material_theme_small_statusbar": true,
 	"material_theme_small_tab": true,
 	"material_theme_tabs_autowidth": true,
 	"material_theme_tabs_separator": true,
-	"material_theme_contrast_mode": true,
+	"overlay_scroll_bars": "enabled",
+	"theme": "Material Spacegray.sublime-theme"
 }
