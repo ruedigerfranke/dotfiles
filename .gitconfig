@@ -5,3 +5,5 @@
 	email = mail@ruedigerfranke.net
 [core]
 	excludesfile = ~/.gitignore_global
+[credential]
+	helper = osxkeychain
