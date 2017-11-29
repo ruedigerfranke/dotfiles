@@ -12,7 +12,7 @@ module.exports = {
     fontSize: 13,
 
     // font family with optional fallbacks
-    fontFamily: 'Roboto Mono, Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: 'SF Mono, Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: '#3F51B5',
@@ -75,7 +75,7 @@ module.exports = {
     MaterialTheme: {
         // Set the theme variant,
         // OPTIONS: 'Darker', 'Palenight', ''
-        theme: 'Darker',
+        theme: '',
 
         // [Optional] Set the rgba() app background opacity, useful when enableVibrance is true
         // OPTIONS: From 0.1 to 1
@@ -106,7 +106,7 @@ module.exports = {
     //
     // Powershell on Windows
     // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
-    shell: '',
+    shell: 'zsh',
 
     // for setting shell arguments (i.e. for using interactive shellArgs: ['-i'])
     // by default ['--login'] will be used
@@ -137,7 +137,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ["hyperpower", "hyper-material-theme", "hypercwd", "hyperterm-cursor"],
+  plugins: ["hyperpower", "hyper-material-theme", "hypercwd", "hyperterm-cursor", "hyper-atom-dark-transparent"],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
