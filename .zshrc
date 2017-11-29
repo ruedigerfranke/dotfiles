@@ -100,3 +100,13 @@ alias ohmyzsh="subl ~/.oh-my-zsh"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Add language flags for Hyper (Terminal) by Rüdiger 2017-11-27
+export LANG="de_DE.UTF-8"
+export LC_COLLATE="de_DE.UTF-8"
+export LC_CTYPE="de_DE.UTF-8"
+export LC_MESSAGES="de_DE.UTF-8"
+export LC_MONETARY="de_DE.UTF-8"
+export LC_NUMERIC="de_DE.UTF-8"
+export LC_TIME="de_DE.UTF-8"
+export LC_ALL="de_DE.UTF-8"
