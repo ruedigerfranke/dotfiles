@@ -115,3 +115,6 @@ export LC_ALL="de_DE.UTF-8"
 
 # Tagesaufstellung für GIT Repo
 alias git-today="git --no-pager log --since=\"0:00\" --author \".*franke.*\" | grep '^\s\s\s\s' | grep -v 'git-svn' | sed 's/^[ \t]*/- /' | grep -v '^-\s$' | tail -r | pbcopy | echo \"Protokoll in die Zwischenablage kopiert\""
+
+# Benutzer bin Ordner hinzügfügen
+export PATH="$PATH:$HOME/bin"
