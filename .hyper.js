@@ -137,7 +137,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ["hypercwd", "hyperterm-cursor", "hyperterm-atom-dark", "hyper-macos", "hyper-touchbar"],
+  plugins: ["hypercwd", "hyperterm-cursor", "hyperterm-atom-dark", "hyper-touchbar", "hyperterm-1password"],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
