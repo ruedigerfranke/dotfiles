@@ -118,3 +118,6 @@ alias git-today="git --no-pager log --since=\"0:00\" --author \".*franke.*\" | g
 
 # Benutzer bin Ordner hinzügfügen
 export PATH="$PATH:$HOME/bin"
+
+# Composer zu PATH hinzugefügt
+export PATH="$PATH:$HOME/.composer/vendor/bin"
