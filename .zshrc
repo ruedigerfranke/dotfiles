@@ -116,8 +116,25 @@ export LC_ALL="de_DE.UTF-8"
 # Tagesaufstellung für GIT Repo
 alias git-today="git --no-pager log --since=\"0:00\" --author \".*franke.*\" | grep '^\s\s\s\s' | grep -v 'git-svn' | sed 's/^[ \t]*/- /' | grep -v '^-\s$' | tail -r | pbcopy | echo \"Protokoll in die Zwischenablage kopiert\""
 
+# Alias für PathFinder
+alias fl="open -a ForkLift"
+
 # Benutzer bin Ordner hinzügfügen
-export PATH="$PATH:$HOME/bin"
+export PATH="$HOME/bin:$PATH"
 
 # Composer zu PATH hinzugefügt
 export PATH="$PATH:$HOME/.composer/vendor/bin"
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+
+# Alias für Rails Bundler
+alias bi="bundle install"
+
+# Alias für MAMP PHP
+alias phpmamp='/Applications/MAMP/bin/php/php7.2.1/bin/php -c "/Library/Application Support/appsolute/MAMP PRO/conf/php7.2.1.ini"'
+alias pear='/Applications/MAMP/bin/php/php7.2.1/bin/pear'
+alias pecl='/Applications/MAMP/bin/php/php7.2.1/bin/pecl'
+
+# Firebird
+# export FIREBIRD_HOME=/Library/Frameworks/Firebird.framework/Resources
+# export PATH=$PATH:$FIREBIRD_HOME/bin

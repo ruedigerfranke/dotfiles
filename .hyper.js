@@ -1,3 +1,4 @@
+// -- hyper-stylesheet-hash:2cb3aa980608b3253d183a8805f90168 --
 // Future versions of Hyper may add additional config options,
 // which will not automatically be merged into this file.
 // See https://hyper.is#cfg for all currently supported options.
@@ -11,8 +12,9 @@ module.exports = {
     // default font size in pixels for all tabs
     fontSize: 14,
 
-    // font family with optional fallbacks
-    fontFamily: '"Operator Mono SSm", "SF Mono", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    // font family with optional fallbacks 
+    // "Operator Mono SSm"
+    fontFamily: '"SF Mono", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: '#3F51B5',
@@ -33,7 +35,11 @@ module.exports = {
     borderColor: '#333',
 
     // custom css to embed in the main window
-    css: '',
+    css: `
+      #hyper .tab_tab.tab_active {
+        background-color: #00f;
+      }
+    `,
 
     // custom css to embed in the terminal window
     termCSS: '',
@@ -70,24 +76,6 @@ module.exports = {
       lightMagenta: '#cc00ff',
       lightCyan: '#00ffff',
       lightWhite: '#ffffff'
-    },
-
-    MaterialTheme: {
-        // Set the theme variant,
-        // OPTIONS: 'Darker', 'Palenight', ''
-        theme: '',
-
-        // [Optional] Set the rgba() app background opacity, useful when enableVibrance is true
-        // OPTIONS: From 0.1 to 1
-        backgroundOpacity: '0.9',
-
-        // [Optional] Set the accent color for the current active tab
-        accentColor: '#3F51B5',
-
-        // [Optional] Mac Only. Need restart. Enable the vibrance and blurred background
-        // OPTIONS: 'dark', 'ultra-dark', 'bright'
-        // NOTE: The backgroundOpacity should be between 0.1 and 0.9 to see the effect.
-        vibrancy: 'dark'
     },
 
     hypercwd: {
@@ -140,10 +128,11 @@ module.exports = {
   plugins: [
     "hypercwd",
     "hyperterm-cursor",
-    "hyperterm-atom-dark",
-    "hyper-touchbar",
+    "hyper-native",
+    "hyper-tab-touchbar",
     "hyperterm-1password",
-    "hyper-quit"
+    "hyper-quit",
+    'hyperterm-atom-dark'
   ],
 
   // in development, you can create a directory under
