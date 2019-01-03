@@ -63,7 +63,9 @@ plugins=(
   rails
   ruby
   rvm
-  sublime
+  vagrant
+  vagrant-prompt
+  vscode
   wd
 )
 
@@ -134,6 +136,9 @@ alias bi="bundle install"
 alias phpmamp='/Applications/MAMP/bin/php/php7.2.1/bin/php -c "/Library/Application Support/appsolute/MAMP PRO/conf/php7.2.1.ini"'
 alias pear='/Applications/MAMP/bin/php/php7.2.1/bin/pear'
 alias pecl='/Applications/MAMP/bin/php/php7.2.1/bin/pecl'
+
+# Flutter to path
+export PATH="$PATH:$HOME/lib/flutter/bin"
 
 # Firebird
 # export FIREBIRD_HOME=/Library/Frameworks/Firebird.framework/Resources
