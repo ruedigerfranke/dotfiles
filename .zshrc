@@ -4,10 +4,12 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
+# source ~/.iterm2_shell_integration.zsh
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="hyperzsh"
+ZSH_THEME="ys"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -63,10 +65,9 @@ plugins=(
   rails
   ruby
   rvm
-  vagrant
-  vagrant-prompt
   vscode
   wd
+  vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -143,3 +144,9 @@ export PATH="$PATH:$HOME/lib/flutter/bin"
 # Firebird
 # export FIREBIRD_HOME=/Library/Frameworks/Firebird.framework/Resources
 # export PATH=$PATH:$FIREBIRD_HOME/bin
+
+# Add Python User bin to path
+export PATH="$PATH:/Users/rfranke/Library/Python/2.7/bin"
+
+export EDITOR="code --wait"
+# export EDITOR="vim"
