@@ -4,7 +4,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
-# source ~/.iterm2_shell_integration.zsh
+source ~/.iterm2_shell_integration.zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -128,7 +128,6 @@ export PATH="$HOME/bin:$PATH"
 # Composer zu PATH hinzugefügt
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
-export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
 # Alias für Rails Bundler
 alias bi="bundle install"
@@ -150,3 +149,67 @@ export PATH="$PATH:/Users/rfranke/Library/Python/2.7/bin"
 
 export EDITOR="code --wait"
 # export EDITOR="vim"
+
+# Better searching in command mode
+bindkey -M vicmd '?' history-incremental-search-backward
+bindkey -M vicmd '/' history-incremental-search-forward
+
+# Beginning search with arrow keys
+bindkey "^[OA" up-line-or-beginning-search
+bindkey "^[OB" down-line-or-beginning-search
+bindkey -M vicmd "k" up-line-or-beginning-search
+bindkey -M vicmd "j" down-line-or-beginning-search
+
+# Updates editor information when the keymap changes.
+function zle-keymap-select() {
+  zle reset-prompt
+  zle -R
+}
+
+zle -N zle-keymap-select
+
+function vi_mode_prompt_info() {
+  echo "${${KEYMAP/vicmd/[% NORMAL]%}/(main|viins)/[% INSERT]%}"
+}
+
+# define right prompt, regardless of whether the theme defined it
+RPS1='$(vi_mode_prompt_info)'
+RPS2=$RPS1
+
+# iTerm Custom Badge -> Use it with \(user.gitStatus)
+function iterm2_print_user_vars() {
+  iterm2_set_user_var gitStatus "$(getGitStatus)"
+}
+
+function getGitStatus {
+  if [[ $(git status 2> /dev/null) = "" ]] then
+    echo "$(topDirWithoutSlash)"
+  else
+    # echo "$(getGitProjectDir)$(topDir) git:($(getGitBranch))$(isGitBranchDirty)"
+    echo "$(getGitProjectDir)"
+  fi
+}
+
+function getGitProjectDir {
+  basename $(git rev-parse --show-toplevel 2> /dev/null ) 2> /dev/null
+}
+
+function topDir {
+  if [[ $(basename $(pwd)) = $(getGitProjectDir) ]] then
+   echo ""
+  else
+   echo "/$(basename $(pwd))"
+  fi
+}
+
+function topDirWithoutSlash {
+  echo "$(basename $(pwd))"
+}
+
+function getGitBranch {
+  basename $(git branch 2> /dev/null | grep \* | cut -c3-) 2> /dev/null
+}
+
+function isGitBranchDirty {
+  [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "⚡ "
+}
