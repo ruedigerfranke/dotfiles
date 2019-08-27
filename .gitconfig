@@ -4,7 +4,7 @@
 	name = Rüdiger Franke
 	email = mail@ruedigerfranke.net
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/rfranke/.gitignore_global
 [credential]
 	helper = osxkeychain
 
@@ -30,3 +30,9 @@
 	prompt = false
 [merge]
 	tool = Kaleidoscope
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

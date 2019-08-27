@@ -17,11 +17,12 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'joshdick/onedark.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'prettier/vim-prettier'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'hackhowtofaq/vim-solargraph'
+" Plugin 'tpope/vim-fugitive'
+" Plugin 'vim-syntastic/syntastic'
+" Plugin 'prettier/vim-prettier'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'hackhowtofaq/vim-solargraph'
+Plugin 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -94,6 +95,8 @@ if has("gui_macvim")
 endif
 
 map <C-n> :NERDTreeToggle<CR>
+nnoremap <Leader>f :NERDTreeToggle<Enter>
+nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -103,3 +106,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" CTRL-P Configuration
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
