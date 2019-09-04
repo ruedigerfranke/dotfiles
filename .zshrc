@@ -152,6 +152,9 @@ export PATH="$PATH:/Users/rfranke/Library/Python/2.7/bin"
 export EDITOR="code --wait"
 # export EDITOR="vim"
 
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
 # Better searching in command mode
 bindkey -M vicmd '?' history-incremental-search-backward
 bindkey -M vicmd '/' history-incremental-search-forward
