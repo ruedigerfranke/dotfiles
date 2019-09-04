@@ -10,8 +10,9 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'Solarized'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
@@ -54,7 +55,7 @@ call plug#end()
 set guifont=Operator\ Mono\ SSm\ Medium:h13
 set linespace=8
 
-let mapleader = ","
+" let mapleader = ","
 
 augroup numbertoggle
   autocmd!
@@ -62,7 +63,7 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter   * set number
 augroup END
 
-let mapleader=" "
+map <Space> <Leader>
 
 " Enable Syntax highlighting
 syntax enable
