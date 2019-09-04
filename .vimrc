@@ -52,10 +52,8 @@ call plug#end()
 " Put your non-Plugin stuff after this line
 
 " Set font
-set guifont=Operator\ Mono\ SSm\ Medium:h13
-set linespace=8
-
-" let mapleader = ","
+"set guifont=Operator\ Mono\ SSm\ Medium:h13
+"set linespace=8
 
 augroup numbertoggle
   autocmd!
@@ -105,6 +103,11 @@ if has("gui_macvim")
     noremap <D-0> :tablast<CR>
   endif
 endif
+
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
 
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <Leader>f :NERDTreeToggle<Enter>
