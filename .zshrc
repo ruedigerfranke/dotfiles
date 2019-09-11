@@ -62,13 +62,14 @@ ZSH_THEME="ys"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  osx
   rails
   ruby
   rvm
   vscode
   wd
   vi-mode
-  zsh-autosuggestions
+  # zsh-autosuggestions
   zsh-syntax-highlighting
 )
 
@@ -149,8 +150,8 @@ export PATH="$PATH:$HOME/lib/flutter/bin"
 # Add Python User bin to path
 export PATH="$PATH:/Users/rfranke/Library/Python/2.7/bin"
 
-export EDITOR="code --wait"
-# export EDITOR="vim"
+# export EDITOR="code --wait"
+export EDITOR="vim"
 
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
