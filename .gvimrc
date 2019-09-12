@@ -2,7 +2,7 @@
 " set guifont=FuraCode_Nerd_Font:h12
 
 set guifont=Operator\ Mono\ SSm\ Medium:h12
-set linespace=12
+set linespace=8
 
 hi htmlArg gui=italic
 hi Comment gui=italic

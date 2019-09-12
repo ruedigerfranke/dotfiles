@@ -1,7 +1,22 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible                   " be iMproved, required
+" filetype off                       " required
+filetype plugin on
+set noswapfile                     " Swup files off, do all the things in memory
+set encoding=utf-8
 
-set noswapfile
+" Enable auto-completion
+set wildmode=longest,list,full
+
+" Enable Syntax highlighting
+syntax enable
+
+" Set Tabsize to 2
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+" Disable auto commenting on newline
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -24,6 +39,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 augroup numbertoggle
@@ -34,15 +51,6 @@ augroup END
 
 map <Space> <Leader>
 
-" Enable Syntax highlighting
-syntax enable
-
-" Set Tabsize to 2
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
-set encoding=utf8
 
 imap jj <Esc>
 
@@ -52,7 +60,7 @@ nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 let NERDTreeShowHidden=1
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
@@ -61,6 +69,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " CTRL-P Configuration
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <Leader>h :CtrlPMRUFiles<CR>
@@ -185,7 +194,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
 " Manage extensions
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
@@ -200,4 +209,19 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+" Settings for vimwiki
+"""""""""""""""""""""""""""""""""""""""""""""
+
+let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki', 'path_html':'~/vimwiki/export/html/', 'syntax': 'markdown', 'ext': '.md'}]
+
+map <leader>wc <Plug>VimwikiToggleListItem
+map <leader>wd <Plug>VimwikiMakeDiaryNote
+map <leader>wg <Plug>VimwikiDiaryGenerateLinks
+map <Leader>wD <Plug>VimwikiDeleteLink
+map <Leader>wn <Plug>VimwikiNextLink
+map <Leader>wp <Plug>VimwikiPrevLink
+
 
