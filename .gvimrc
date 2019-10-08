@@ -1,7 +1,7 @@
-" set macligatures
+set macligatures
 " set guifont=FuraCode_Nerd_Font:h12
 
-set guifont=Operator\ Mono\ SSm\ Medium:h12
+set guifont=Operator\ Mono\ SSm\ Lig:h12
 set linespace=8
 
 hi htmlArg gui=italic
@@ -44,6 +44,6 @@ if has("gui_macvim")
   endif
 endif
 
-if exists("g:loaded_webdevicons")
-  call webdevicons#refresh()
-endif
+" if exists("g:loaded_webdevicons")
+"   call webdevicons#refresh()
+" endif

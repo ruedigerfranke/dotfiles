@@ -18,30 +18,13 @@ set expandtab
 " Disable auto commenting on newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" DON'T USE ARROW KEYS
-noremap  <Up> ""
-noremap! <Up> <Esc>
-noremap  <Down> ""
-noremap! <Down> <Esc>
-noremap  <Left> ""
-noremap! <Left> <Esc>
-noremap  <Right> ""
-noremap! <Right> <Esc>
-
-" Move up and down in autocomplete with <c-j> and <c-k>
-inoremap <expr> <c-j> pumvisible() ? "\<C-N>" : "j"
-inoremap <expr> <c-k> pumvisible() ? "\<C-P>" : "k"
-  
-" inoremap <CR> <C-G>u<CR>
-
-if empty(glob('~/.vim/autoload/plug.vim'))
+if empty(glob('~/.nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
+call plug#begin('~/nvim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -56,16 +39,17 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 augroup numbertoggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set number norelativenumber
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set number
 augroup END
 
 map <Space> <Leader>
+
 
 imap jj <Esc>
 
@@ -75,7 +59,13 @@ nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 let NERDTreeShowHidden=1
 
 set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " CTRL-P Configuration
 let g:ctrlp_show_hidden = 1
@@ -83,11 +73,8 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <Leader>h :CtrlPMRUFiles<CR>
 
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-
-" Endwise
-let g:endwise_no_mappings = 1
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Settings for coc.mvim
@@ -131,7 +118,6 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> <g <Plug>(coc-diagnostic-prev)
@@ -228,13 +214,13 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Settings for vimwiki
 """""""""""""""""""""""""""""""""""""""""""""
 
-" let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki', 'path_html':'~/vimwiki/export/html/', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki', 'path_html':'~/vimwiki/export/html/', 'syntax': 'markdown', 'ext': '.md'}]
 
-" map <leader>wc <Plug>VimwikiToggleListItem
-" map <leader>wd <Plug>VimwikiMakeDiaryNote
-" map <leader>wg <Plug>VimwikiDiaryGenerateLinks
-" map <Leader>wD <Plug>VimwikiDeleteLink
-" map <Leader>wn <Plug>VimwikiNextLink
-" map <Leader>wp <Plug>VimwikiPrevLink
+map <leader>wc <Plug>VimwikiToggleListItem
+map <leader>wd <Plug>VimwikiMakeDiaryNote
+map <leader>wg <Plug>VimwikiDiaryGenerateLinks
+map <Leader>wD <Plug>VimwikiDeleteLink
+map <Leader>wn <Plug>VimwikiNextLink
+map <Leader>wp <Plug>VimwikiPrevLink
 
 
