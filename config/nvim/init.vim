@@ -3,12 +3,20 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
 
+set noswapfile              " Swap files off, do all the things in memory
+
 set tabstop=2
 set shiftwidth=2
 set expandtab
 
+set mouse=a
+
 set nohlsearch
+
 syntax enable
+
+" Disable auto commenting on newline
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 hi htmlArg cterm=italic
 hi Comment cterm=italic
@@ -33,47 +41,57 @@ if has("unix")
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" START OF PLUGIN CONFIGURATIONS
+" PLUGIN INITIALIZATION
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin(stdpath('data') . '/plugged')
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'vim-scripts/BufOnly.vim'
+
+Plug 'Shougo/denite.nvim'
+Plug 'chemzqm/denite-git'
+Plug '5t111111/denite-rails'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'morhetz/gruvbox'
+
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDTreeShowHidden=1
 
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <Leader>f :NERDTreeToggle<Enter>
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" gruvbox (Theme)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'morhetz/gruvbox'
-
-set background=dark
-let g:gruvbox_italic = 1
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Other plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Denite Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'Shougo/denite.nvim'
-Plug 'chemzqm/denite-git'
-Plug '5t111111/denite-rails'
-
 " Define mappings
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
@@ -96,19 +114,6 @@ nmap , :Denite buffer<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COC Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
-" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -151,9 +156,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Or use `complete_info` if your vim support it, like:
 " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" Use `<g` and `>g` to navigate diagnostics
+nmap <silent> <g <Plug>(coc-diagnostic-prev)
+nmap <silent> >g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -246,10 +251,15 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" gruvbox (Theme)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set background=dark
+let g:gruvbox_italic = 1
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Airline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 " let g:airline_theme = 'gruvbox'
 let g:airline_powerline_fonts = 1
@@ -262,18 +272,16 @@ let g:airline#extensions#tabline#enabled = 1
 " let g:airline_extensions = ['branch', 'hunks', 'coc']
 
 
-call plug#end()
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" END OF PLUGIN CONFIGURATIONS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Additional Keymappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 imap jj <ESC>
 imap jk <ESC>
 imap kk <ESC>
+
+nnoremap <silent>,qb :<C-u>bd<cr>
+nnoremap <silent>,qa :<C-u>bufdo bd<cr>
+nnoremap <silent>,qo :<C-u>BufOnly<cr>
 
 """""" TESTING """"""
 
@@ -321,20 +329,23 @@ call denite#custom#map('insert,normal', "<C-h>", '<denite:do_action:split>')
 "   prompt_highlight        - Specify color of prompt
 "   highlight_matched_char  - Matched characters highlight
 "   highlight_matched_range - matched range highlight
+
+" BACKUP OF OTHER OPTIONS - PLEASE DELETE LATER
+" \ 'split': 'floating',
+" \ 'source_names': 'short',
+" \ 'prompt': 'λ:',
+" \ 'statusline': 0,
+" \ 'highlight_matched_char': 'WildMenu',
+" \ 'highlight_matched_range': 'Visual',
+" \ 'highlight_window_background': 'Visual',
+" \ 'highlight_filter_background': 'StatusLine',
+" \ 'highlight_prompt': 'StatusLine',
+" \ 'vertical_preview': 1,
+" \ 'start_filter': 1,
+
 let s:denite_options = {'default' : {
-\ 'split': 'floating',
-\ 'start_filter': 1,
 \ 'auto_resize': 1,
-\ 'source_names': 'short',
-\ 'prompt': 'λ:',
-\ 'statusline': 0,
-\ 'highlight_matched_char': 'WildMenu',
-\ 'highlight_matched_range': 'Visual',
-\ 'highlight_window_background': 'Visual',
-\ 'highlight_filter_background': 'StatusLine',
-\ 'highlight_prompt': 'StatusLine',
-\ 'winrow': 1,
-\ 'vertical_preview': 1
+\ 'winrow': 1
 \ }}
 
 " Loop through denite options and enable them
