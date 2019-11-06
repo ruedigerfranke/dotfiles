@@ -1,7 +1,7 @@
 set macligatures
 " set guifont=FuraCode_Nerd_Font:h12
 
-set guifont=Operator\ Mono\ SSm\ Lig:h12
+set guifont=Operator\ Mono\ SSm\ Lig:h11
 set linespace=8
 
 hi htmlArg gui=italic

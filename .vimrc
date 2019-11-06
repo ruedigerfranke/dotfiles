@@ -56,6 +56,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+Plug 'mileszs/ack.vim'
+
 " Plug 'vimwiki/vimwiki'
 call plug#end()
 
@@ -237,4 +239,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " map <Leader>wn <Plug>VimwikiNextLink
 " map <Leader>wp <Plug>VimwikiPrevLink
 
-
+"""""""""""""""""""""""""""""""""""""""""""""
+" Settings for ack.vim
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:ackprg = 'ag --vimgrep'

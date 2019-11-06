@@ -61,6 +61,8 @@ ZSH_THEME="ys"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  docker
+  docker-compose
   git
   osx
   rails
@@ -219,3 +221,8 @@ function getGitBranch {
 function isGitBranchDirty {
   [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "⚡ "
 }
+
+# Homebrew sbin hinzufügen
+export PATH="/usr/local/sbin:$PATH"
+
+export TERM=xterm-256color-italic
