@@ -11,16 +11,14 @@ set expandtab
 
 set mouse=a
 
+set ignorecase
+" set smartcase
 set nohlsearch
 
 syntax enable
 
 " Disable auto commenting on newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-hi htmlArg cterm=italic
-hi Comment cterm=italic
-hi Type    cterm=italic
 
 let g:mapleader="<space>"
 
@@ -75,7 +73,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
@@ -109,7 +108,7 @@ function! s:denite_my_settings() abort
   \ denite#do_map('toggle_select').'j'
 endfunction
 
-nmap , :Denite buffer<CR>
+" nmap , :Denite buffer<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COC Configuration
@@ -153,7 +152,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
 
 " Use `<g` and `>g` to navigate diagnostics
 nmap <silent> <g <Plug>(coc-diagnostic-prev)
@@ -251,10 +250,24 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" gruvbox (Theme)
+" OneDark  (Theme)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark
-let g:gruvbox_italic = 1
+colorscheme onedark
+
+hi htmlArg cterm=italic
+hi Comment cterm=italic
+hi Type    cterm=italic
+
+hi CocUnderline gui=underline cterm=underline
+hi CocErrorHighlight ctermfg=red  guifg=#c4384b gui=underline cterm=underline
+hi CocWarningHighlight ctermfg=yellow guifg=#c4ab39 gui=underline cterm=underline
+
+" let g:gruvbox_italic = 1
+
+let g:onedark_terminal_italics = 1
+let g:onedark_termcolors = 256
+
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
