@@ -17,6 +17,9 @@ set nohlsearch
 
 syntax enable
 
+" Check if open buffers changed in the background
+au FocusGained * checktime
+
 " Disable auto commenting on newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -50,7 +53,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
+" Plug 'tpope/vim-endwise'
 Plug 'vim-scripts/BufOnly.vim'
 
 Plug 'Shougo/denite.nvim'
@@ -128,7 +131,10 @@ set cmdheight=2
 set updatetime=300
 
 " don't give |ins-completion-menu| messages.
-set shortmess+=c
+" set shortmess+=c
+
+" Don't show start screen (:intro)
+set shortmess+=I
 
 " always show signcolumns
 set signcolumn=yes
@@ -151,8 +157,12 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
+
+" Move up and down in autocomplete with <c-j> and <c-k>
+inoremap <expr> <c-j> pumvisible() ? "\<C-N>" : "j"
+inoremap <expr> <c-k> pumvisible() ? "\<C-P>" : "k"
 
 " Use `<g` and `>g` to navigate diagnostics
 nmap <silent> <g <Plug>(coc-diagnostic-prev)
@@ -292,9 +302,9 @@ imap jj <ESC>
 imap jk <ESC>
 imap kk <ESC>
 
-nnoremap <silent>,qb :<C-u>bd<cr>
-nnoremap <silent>,qa :<C-u>bufdo bd<cr>
-nnoremap <silent>,qo :<C-u>BufOnly<cr>
+nnoremap <silent>,bd :<C-u>bd<cr>
+nnoremap <silent>,bda :<C-u>bufdo bd<cr>
+nnoremap <silent>,bdo :<C-u>BufOnly<cr>
 
 """""" TESTING """"""
 
