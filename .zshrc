@@ -71,7 +71,7 @@ plugins=(
   vscode
   wd
   vi-mode
-  # zsh-autosuggestions
+  zsh-autosuggestions
   zsh-syntax-highlighting
 )
 
@@ -222,7 +222,13 @@ function isGitBranchDirty {
   [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "⚡ "
 }
 
-# Homebrew sbin hinzufügen
+# Add Homebrew sbin to PATH
 export PATH="/usr/local/sbin:$PATH"
 
+# Set xterm-256color-italic and add a fix for ssh
 export TERM=xterm-256color-italic
+alias ssh="TERM=xterm-256color ssh"
+
+# Configuration for zsh-autosuggestions
+bindkey '^\r' autosuggest-execute
+
