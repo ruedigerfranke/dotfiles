@@ -230,5 +230,5 @@ export TERM=xterm-256color-italic
 alias ssh="TERM=xterm-256color ssh"
 
 # Configuration for zsh-autosuggestions
-bindkey '^\r' autosuggest-execute
-
+# bindkey '^\n' autosuggest-execute
+# bindkey '^[OM' autosuggest-execute
