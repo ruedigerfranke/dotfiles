@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/Users/rfranke/Workspace/voidmod/direct-health'
+let g:netrw_dirhist_8='/Users/rfranke/Workspace/voidmod'
+let g:netrw_dirhist_7='/Users/rfranke/Workspace/voidmod/direct-health'
+let g:netrw_dirhist_6='/Users/rfranke/Workspace/voidmod/direct-health/app/models'
+let g:netrw_dirhist_5='/Users/rfranke/Workspace/voidmod/direct-health/app'
+let g:netrw_dirhist_4='/Users/rfranke/Workspace/voidmod/direct-health'
+let g:netrw_dirhist_3='/Users/rfranke/Workspace/voidmod/direct-health/app/controllers'
+let g:netrw_dirhist_2='/Users/rfranke/Workspace/voidmod/direct-health/app'
+let g:netrw_dirhist_1='/Users/rfranke/Workspace/voidmod/direct-health'

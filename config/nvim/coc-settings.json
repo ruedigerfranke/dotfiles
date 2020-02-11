@@ -1,0 +1,23 @@
+{
+  "solargraph.useBundler": true,
+  "solargraph.diagnostics": true,
+  "solargraph.formatting": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "Markdown",
+    "ruby",
+    "typescript",
+    "typescriptreact",
+    "javascript"
+  ],
+  "list.normalMappings": {
+    "t": "action:tabe",
+    "v": "action:vsplit",
+    "s": "action:split",
+    "d": "expr:GetDeleteAction"
+  },
+  "list.insertMappings": {
+    "<C-t>": "action:tabe",
+    "<C-w>": "command:wincmd k"
+  }
+}

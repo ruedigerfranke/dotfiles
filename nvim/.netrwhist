@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/Users/rfranke/awDesigner/direct-health-rails'
+let g:netrw_dirhist_5='/Users/rfranke'
+let g:netrw_dirhist_4='/Users/rfranke/awDesigner'
+let g:netrw_dirhist_3='/Users/rfranke/awDesigner/direct-health-rails'
+let g:netrw_dirhist_2='/Users/rfranke/awDesigner/direct-health-rails/app'
+let g:netrw_dirhist_1='/Users/rfranke/awDesigner/direct-health-rails'

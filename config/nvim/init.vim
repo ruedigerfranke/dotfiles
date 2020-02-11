@@ -85,7 +85,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'joshdick/onedark.vim'
 Plug 'rakr/vim-one'
 
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
