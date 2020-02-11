@@ -1,100 +1,97 @@
-set nocompatible                   " be iMproved, required
-" filetype off                       " required
-filetype plugin on
-set noswapfile                     " Swup files off, do all the things in memory
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General Configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible            " be iMproved, required
 set encoding=utf-8
 
-" Enable auto-completion
-set wildmode=longest,list,full
+set noswapfile              " Swap files off, do all the things in memory
 
-" Enable Syntax highlighting
-syntax enable
-
-" Set Tabsize to 2
 set tabstop=2
 set shiftwidth=2
 set expandtab
 
+set title
+
+set cursorline
+
+set mouse=a
+
+set ignorecase
+set smartcase
+set hlsearch
+
+syntax enable
+
+" Check if open buffers changed in the background
+au FocusGained * checktime
+
 " Disable auto commenting on newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" DON'T USE ARROW KEYS
-noremap  <Up> ""
-noremap! <Up> <Esc>
-noremap  <Down> ""
-noremap! <Down> <Esc>
-noremap  <Left> ""
-noremap! <Left> <Esc>
-noremap  <Right> ""
-noremap! <Right> <Esc>
+" let g:mapleader="<space>"
 
-" Move up and down in autocomplete with <c-j> and <c-k>
-inoremap <expr> <c-j> pumvisible() ? "\<C-N>" : "j"
-inoremap <expr> <c-k> pumvisible() ? "\<C-P>" : "k"
-  
-" inoremap <CR> <C-G>u<CR>
-
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'joshdick/onedark.vim'
-
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
-Plug 'mileszs/ack.vim'
-
-" Plug 'vimwiki/vimwiki'
-call plug#end()
-
+" Automatic switching between relative and norelative linenumbers
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set number relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set number norelativenumber
 augroup END
+      
+" Only on the Mac do the following stuff
+if has("unix")
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin"
+    " I running on a Mac!
+    let g:python3_host_prog = '/usr/local/bin/python3'
+  endif
+endif
 
-map <Space> <Leader>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGIN INITIALIZATION
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-imap jj <Esc>
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/BufOnly.vim'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
+
+Plug 'tpope/vim-endwise'
+
+Plug 'tpope/vim-fugitive'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'rakr/vim-one'
+
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Endwise
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Needed to work with coc code completion
+let g:endwise_no_mappings = 1  
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDTreeShowHidden=1
 
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <Leader>f :NERDTreeToggle<Enter>
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
-let NERDTreeShowHidden=1
 
-set statusline+=%#warningmsg#
-set statusline+=%*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COC Configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" CTRL-P Configuration
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-nnoremap <Leader>b :CtrlPBuffer<CR>
-nnoremap <Leader>h :CtrlPMRUFiles<CR>
-
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-
-" Endwise
-let g:endwise_no_mappings = 1
-
-"""""""""""""""""""""""""""""""""""""""""""""
-" Settings for coc.mvim
-"""""""""""""""""""""""""""""""""""""""""""""
-"
 " if hidden is not set, TextEdit might fail.
 set hidden
 
@@ -109,7 +106,10 @@ set cmdheight=2
 set updatetime=300
 
 " don't give |ins-completion-menu| messages.
-set shortmess+=c
+" set shortmess+=c
+
+" Don't show start screen (:intro)
+set shortmess+=I
 
 " always show signcolumns
 set signcolumn=yes
@@ -135,9 +135,13 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
 
+" Move up and down in autocomplete with <c-j> and <c-k>
+inoremap <expr> <c-j> pumvisible() ? "\<C-N>" : "j"
+inoremap <expr> <c-k> pumvisible() ? "\<C-P>" : "k"
+
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> <g <Plug>(coc-diagnostic-prev)
-nmap <silent> >g <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -184,7 +188,6 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Create mappings for function text object, requires document symbols feature of languageserver.
-
 xmap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
@@ -208,6 +211,13 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
+" Show files list
+nnoremap <silent> <C-p>     :<C-u>CocList files<cr>
+" Show buffers
+nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
+nnoremap <silent>;          :<C-u>CocList buffers<cr>
+" Show history
+nnoremap <silent> <space>h  :<C-u>CocList mru<cr>
 " Show all diagnostics
 nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
 " Manage extensions
@@ -225,24 +235,89 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OneDark  (Theme)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set background=dark
+" colorscheme onedark
+
+" hi htmlArg cterm=italic
+" hi Comment cterm=italic
+" hi Type    cterm=italic
+
+" hi CocUnderline gui=underline cterm=underline
+" hi CocErrorHighlight ctermfg=red  guifg=#c4384b gui=underline cterm=underline
+" hi CocWarningHighlight ctermfg=yellow guifg=#c4ab39 gui=underline cterm=underline
+
+" let g:gruvbox_italic = 1
+
+" let g:onedark_terminal_italics = 1
+" let g:onedark_termcolors = 256
+
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-one (Theme)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+
+set background=dark " for the dark version
+" set background=light " for the light version
+let g:one_allow_italics = 1 " I love italic for comments
+colorscheme one
+
+hi htmlArg cterm=italic gui=italic
+hi Comment cterm=italic gui=italic
+hi Type    cterm=italic gui=italic
+
 hi CocUnderline gui=undercurl term=undercurl
 hi CocErrorHighlight ctermfg=red  guifg=#c4384b gui=undercurl term=undercurl
 hi CocWarningHighlight ctermfg=yellow guifg=#c4ab39 gui=undercurl term=undercurl
 
-"""""""""""""""""""""""""""""""""""""""""""""
-" Settings for vimwiki
-"""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki', 'path_html':'~/vimwiki/export/html/', 'syntax': 'markdown', 'ext': '.md'}]
+" let g:airline_theme = 'gruvbox'
+let g:airline_theme='one'
 
-" map <leader>wc <Plug>VimwikiToggleListItem
-" map <leader>wd <Plug>VimwikiMakeDiaryNote
-" map <leader>wg <Plug>VimwikiDiaryGenerateLinks
-" map <Leader>wD <Plug>VimwikiDeleteLink
-" map <Leader>wn <Plug>VimwikiNextLink
-" map <Leader>wp <Plug>VimwikiPrevLink
+let g:airline_powerline_fonts = 0
+" let g:airline#extensions#branch#enabled=1
+let g:airline_extensions = ['branch', 'coc', 'tabline']
+" let g:airline#extensions#tabline#enabled = 1
 
-"""""""""""""""""""""""""""""""""""""""""""""
-" Settings for ack.vim
-"""""""""""""""""""""""""""""""""""""""""""""
-let g:ackprg = 'ag --vimgrep'
+" Do not draw separators for empty sections (only for the active window) >
+let g:airline_skip_empty_sections = 1
+
+" Enable extensions
+" let g:airline_extensions = ['branch', 'hunks', 'coc']
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Additional Keymappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+imap jj <ESC>
+imap jk <ESC>
+imap kk <ESC>
+
+nnoremap <silent>,bd :<C-u>bd<cr>
+nnoremap <silent>,bda :<C-u>bufdo bd<cr>
+nnoremap <silent>,bdo :<C-u>BufOnly<cr>
+
+nnoremap <space>/ :<C-u>nohlsearch<cr>

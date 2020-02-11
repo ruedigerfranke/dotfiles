@@ -1,28 +1,26 @@
 set macligatures
-" set guifont=FuraCode_Nerd_Font:h12
 
-set guifont=Operator\ Mono\ SSm\ Lig:h11
+" set guifont=Operator\ Mono\ SSm\ Lig:h11
+set guifont=JetBrains\ Mono\ Medium:h12
+
 set linespace=8
-
-hi htmlArg gui=italic
-hi Comment gui=italic
-hi Type    gui=italic
-hi htmlArg cterm=italic
-hi Comment cterm=italic
-hi Type    cterm=italic
 
 if has("gui_macvim")
   if has("gui_running")
     set background=dark
-    colorscheme onedark
+"    colorscheme onedark
     
+    " Disable scrollbars (https://til.hashrocket.com/posts/1bcac01e65-remove-both-scrollbars-from-macvim)
+    set guioptions=
 
-    " set macligatures
-    hi Comment gui=italic cterm=italic
-    hi htmlArg gui=italic cterm=italic
-
+    " Disable default menu key bindings
     macmenu &File.New\ Tab key=<nop>
-    " noremap <D-p> <Plug>(CommandT)
+    macmenu &Tools.Make key=<nop>
+
+    " Mac-like key mapping (VSCode inspired)
+    nnoremap <silent> <D-p> :<C-u>CocList files<cr>
+    nnoremap <silent> <D-l> :<C-u>CocList outline<cr>
+    nnoremap <silent> <D-b> :NERDTreeToggle<CR>
 
     " Press Ctrl-Tab to switch between open tabs (like browser tabs) to 
     " the right side. Ctrl-Shift-Tab goes the other way.
@@ -43,7 +41,3 @@ if has("gui_macvim")
     noremap <D-0> :tablast<CR>
   endif
 endif
-
-" if exists("g:loaded_webdevicons")
-"   call webdevicons#refresh()
-" endif
