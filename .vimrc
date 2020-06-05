@@ -2,6 +2,9 @@
 " General Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible            " be iMproved, required
+set autoread
+set autoindent
+
 set encoding=utf-8
 
 set noswapfile              " Swap files off, do all the things in memory
@@ -59,6 +62,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/BufOnly.vim'
+Plug 'AndrewRadev/tagalong.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
 
@@ -286,9 +290,9 @@ hi htmlArg cterm=italic gui=italic
 hi Comment cterm=italic gui=italic
 hi Type    cterm=italic gui=italic
 
-hi CocUnderline gui=undercurl term=undercurl
-hi CocErrorHighlight ctermfg=red  guifg=#c4384b gui=undercurl term=undercurl
-hi CocWarningHighlight ctermfg=yellow guifg=#c4ab39 gui=undercurl term=undercurl
+" hi CocUnderline gui=undercurl term=undercurl
+" hi CocErrorHighlight ctermfg=red  guifg=#c4384b gui=undercurl term=undercurl
+" hi CocWarningHighlight ctermfg=yellow guifg=#c4ab39 gui=undercurl term=undercurl
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Airline
@@ -296,6 +300,7 @@ hi CocWarningHighlight ctermfg=yellow guifg=#c4ab39 gui=undercurl term=undercurl
 
 " let g:airline_theme = 'gruvbox'
 let g:airline_theme='one'
+
 
 let g:airline_powerline_fonts = 0
 " let g:airline#extensions#branch#enabled=1
@@ -317,7 +322,13 @@ imap jk <ESC>
 imap kk <ESC>
 
 nnoremap <silent>,bd :<C-u>bd<cr>
+nnoremap <silent><space>w :<C-u>bd<cr>
 nnoremap <silent>,bda :<C-u>bufdo bd<cr>
 nnoremap <silent>,bdo :<C-u>BufOnly<cr>
 
 nnoremap <space>/ :<C-u>nohlsearch<cr>
+
+
+hi CocUnderline gui=undercurl term=undercurl
+hi CocErrorHighlight ctermfg=red  guifg=#c4384b gui=undercurl term=undercurl
+hi CocWarningHighlight ctermfg=yellow guifg=#c4ab39 gui=undercurl term=undercurl

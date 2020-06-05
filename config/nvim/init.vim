@@ -95,7 +95,7 @@ call plug#end()
 let NERDTreeShowHidden=1
 
 map <C-n> :NERDTreeToggle<CR>
-nnoremap <Leader>f :NERDTreeToggle<Enter>
+nnoremap <Leader>f :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 
 
@@ -172,9 +172,9 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <c-j> pumvisible() ? "\<C-N>" : "j"
 inoremap <expr> <c-k> pumvisible() ? "\<C-P>" : "k"
 
-" Use `<g` and `>g` to navigate diagnostics
-nmap <silent> <g <Plug>(coc-diagnostic-prev)
-nmap <silent> >g <Plug>(coc-diagnostic-next)
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -217,8 +217,10 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
 nmap <leader>ac  <Plug>(coc-codeaction)
+nmap \ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
+nmap \qf  <Plug>(coc-fix-current)
 
 " Create mappings for function text object, requires document symbols feature of languageserver.
 xmap if <Plug>(coc-funcobj-i)
@@ -248,7 +250,6 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 nnoremap <silent> <C-p>     :<C-u>CocList files<cr>
 " Show buffers
 nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
-nnoremap <silent>;          :<C-u>CocList buffers<cr>
 " Show history
 nnoremap <silent> <space>h  :<C-u>CocList mru<cr>
 " Show all diagnostics
@@ -261,12 +262,28 @@ nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Global search (grep)
+nnoremap <silent> <space>g  :<C-u>CocList grep<CR>
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+""" For coc-git
+" navigate chunks of current buffer
+nmap [G <Plug>(coc-git-prevchunk)
+nmap ]G <Plug>(coc-git-nextchunk)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap gc <Plug>(coc-git-commit)
+" create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OneDark  (Theme)
@@ -315,9 +332,13 @@ set background=dark " for the dark version
 let g:one_allow_italics = 1 " I love italic for comments
 colorscheme one
 
-hi htmlArg cterm=italic
-hi Comment cterm=italic
-hi Type    cterm=italic
+hi htmlArg     cterm=italic
+hi Comment     cterm=italic
+hi Type        cterm=italic
+hi Conditional cterm=italic
+hi Repeat      cterm=italic
+hi Label       cterm=italic
+hi Exception   cterm=italic
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Airline
@@ -345,8 +366,15 @@ imap jj <ESC>
 imap jk <ESC>
 imap kk <ESC>
 
+" Join lines with K
+nnoremap K i<CR><Esc>
+
 nnoremap <silent>,bd :<C-u>bd<cr>
+nnoremap <silent><space>w :<C-u>bd<CR>
 nnoremap <silent>,bda :<C-u>bufdo bd<cr>
 nnoremap <silent>,bdo :<C-u>BufOnly<cr>
 
 nnoremap <space>/ :<C-u>nohlsearch<cr>
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv

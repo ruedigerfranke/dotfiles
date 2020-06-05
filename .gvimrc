@@ -1,7 +1,7 @@
 set macligatures
 
 " set guifont=Operator\ Mono\ SSm\ Lig:h11
-set guifont=JetBrains\ Mono\ Medium:h12
+set guifont=JetBrains\ Mono\ Medium:h13
 
 set linespace=8
 

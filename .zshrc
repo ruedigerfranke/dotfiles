@@ -64,6 +64,7 @@ plugins=(
   docker
   docker-compose
   git
+  iterm2
   osx
   rails
   ruby
@@ -71,7 +72,7 @@ plugins=(
   vscode
   wd
   vi-mode
-  zsh-autosuggestions
+  # zsh-autosuggestions
   zsh-syntax-highlighting
 )
 
@@ -102,9 +103,9 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-alias zshconfig="subl ~/.zshrc"
-alias ohmyzsh="subl ~/.oh-my-zsh"
+alias vimconf="vim ~/.config/nvim/init.vim"
+alias zshconf="vim ~/.zshrc"
+alias ohmyzsh="vim ~/.oh-my-zsh"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
