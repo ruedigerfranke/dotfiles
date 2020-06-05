@@ -173,8 +173,8 @@ inoremap <expr> <c-j> pumvisible() ? "\<C-N>" : "j"
 inoremap <expr> <c-k> pumvisible() ? "\<C-P>" : "k"
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> g[ <Plug>(coc-diagnostic-prev)
+nmap <silent> g] <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -273,8 +273,8 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 """ For coc-git
 " navigate chunks of current buffer
-nmap [G <Plug>(coc-git-prevchunk)
-nmap ]G <Plug>(coc-git-nextchunk)
+nmap g{ <Plug>(coc-git-prevchunk)
+nmap g} <Plug>(coc-git-nextchunk)
 " show chunk diff at current position
 nmap gs <Plug>(coc-git-chunkinfo)
 " show commit contains current position
