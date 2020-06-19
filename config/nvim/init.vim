@@ -1,6 +1,9 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General Configuration
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" NeoVIM - init.vim 
+""" by Rüdiger Franke <mail@ruedigerfranke.net>
+
+
+""" General Configuration                                                   {{{
+
 set encoding=utf-8
 
 set noswapfile              " Swap files off, do all the things in memory
@@ -19,6 +22,10 @@ set ignorecase
 set smartcase
 set hlsearch
 
+" More natural splits
+set splitbelow          " Horizontal split below current.
+set splitright          " Vertical split to right of current.
+
 syntax enable
 
 " Check if open buffers changed in the background
@@ -27,7 +34,7 @@ au FocusGained * checktime
 " Disable auto commenting on newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-let g:mapleader="<space>"
+let mapleader="\<SPACE>"
 
 " Automatic switching between relative and norelative linenumbers
 augroup numbertoggle
@@ -45,9 +52,9 @@ if has("unix")
   endif
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGIN INITIALIZATION
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" }}} 
+
+""" PLUGIN INITIALIZATION                                                   {{{
 
 call plug#begin(stdpath('data') . '/plugged')
 
@@ -58,6 +65,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 " Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-rails'
+Plug 'ecomba/vim-ruby-refactoring'
 Plug 'vim-scripts/BufOnly.vim'
 
 " Plug 'Shougo/denite.nvim'
@@ -65,17 +74,7 @@ Plug 'vim-scripts/BufOnly.vim'
 " Plug '5t111111/denite-rails'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
-" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
+
 Plug 'tpope/vim-fugitive'
 
 Plug 'vim-airline/vim-airline'
@@ -87,42 +86,23 @@ Plug 'rakr/vim-one'
 
 " Plug 'ryanoasis/vim-devicons'
 
+Plug 'mhinz/vim-startify'
+
 call plug#end()
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" }}}
+
+""" NERDTree                                                                {{{
+
 let NERDTreeShowHidden=1
 
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <Leader>f :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 
+""" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Denite Configuration
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Define mappings
-" autocmd FileType denite call s:denite_my_settings()
-" function! s:denite_my_settings() abort
-"   nnoremap <silent><buffer><expr> <CR>
-"   \ denite#do_map('do_action')
-"   nnoremap <silent><buffer><expr> d
-"   \ denite#do_map('do_action', 'delete')
-"   nnoremap <silent><buffer><expr> p
-"   \ denite#do_map('do_action', 'preview')
-"   nnoremap <silent><buffer><expr> q
-"   \ denite#do_map('quit')
-"   nnoremap <silent><buffer><expr> i
-"   \ denite#do_map('open_filter_buffer')
-"   nnoremap <silent><buffer><expr> <Space>
-"   \ denite#do_map('toggle_select').'j'
-" endfunction
-
-" nmap , :Denite buffer<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" COC Configuration
+""" COC Configuration {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " if hidden is not set, TextEdit might fail.
@@ -200,8 +180,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -229,7 +209,7 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 " Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <TAB> <Plug>(coc-range-select)
+" nmap <silent> <TAB> <Plug>(coc-range-select)
 xmap <silent> <TAB> <Plug>(coc-range-select)
 xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
 
@@ -278,37 +258,30 @@ nmap g} <Plug>(coc-git-nextchunk)
 " show chunk diff at current position
 nmap gs <Plug>(coc-git-chunkinfo)
 " show commit contains current position
-nmap gc <Plug>(coc-git-commit)
+nmap gC <Plug>(coc-git-commit)
 " create text object for git chunks
 omap ig <Plug>(coc-git-chunk-inner)
 xmap ig <Plug>(coc-git-chunk-inner)
 omap ag <Plug>(coc-git-chunk-outer)
 xmap ag <Plug>(coc-git-chunk-outer)
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OneDark  (Theme)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set background=dark
-" colorscheme onedark
+""" }}}
 
-" hi htmlArg cterm=italic
-" hi Comment cterm=italic
-" hi Type    cterm=italic
+""" Ruby Refactoring (Plugin) {{{
 
-" hi CocUnderline gui=underline cterm=underline
-" hi CocErrorHighlight ctermfg=red  guifg=#c4384b gui=underline cterm=underline
-" hi CocWarningHighlight ctermfg=yellow guifg=#c4ab39 gui=underline cterm=underline
+:nnoremap <leader>rap  :RAddParameter<cr>
+:nnoremap <leader>rcpc :RConvertPostConditional<cr>
+:nnoremap <leader>rel  :RExtractLet<cr>
+:vnoremap <leader>rec  :RExtractConstant<cr>
+:vnoremap <leader>relv :RExtractLocalVariable<cr>
+:nnoremap <leader>rit  :RInlineTemp<cr>
+:vnoremap <leader>rrlv :RRenameLocalVariable<cr>
+:vnoremap <leader>rriv :RRenameInstanceVariable<cr>
+:vnoremap <leader>rem  :RExtractMethod<cr>
 
-" let g:gruvbox_italic = 1
+""" }}}
 
-" let g:onedark_terminal_italics = 1
-" let g:onedark_termcolors = 256
-
-" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-one (Theme)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" vim-one (Theme) {{{
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -332,17 +305,17 @@ set background=dark " for the dark version
 let g:one_allow_italics = 1 " I love italic for comments
 colorscheme one
 
-hi htmlArg     cterm=italic
-hi Comment     cterm=italic
-hi Type        cterm=italic
-hi Conditional cterm=italic
-hi Repeat      cterm=italic
-hi Label       cterm=italic
-hi Exception   cterm=italic
+hi htmlArg     cterm=italic, gui=italic
+hi Comment     cterm=italic, gui=italic
+hi Type        cterm=italic, gui=italic
+hi Conditional cterm=italic, gui=italic
+hi Repeat      cterm=italic, gui=italic
+hi Label       cterm=italic, gui=italic
+hi Exception   cterm=italic, gui=italic
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Airline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" }}}
+
+""" Airline {{{
 
 " let g:airline_theme = 'gruvbox'
 let g:airline_theme='one'
@@ -358,10 +331,38 @@ let g:airline_skip_empty_sections = 1
 " Enable extensions
 " let g:airline_extensions = ['branch', 'hunks', 'coc']
 
+""" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Additional Keymappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" vim-startify (Plugin) {{{
+"
+" returns all modified files of the current git repo
+" `2>/dev/null` makes the command fail quietly, so that when we are not
+" in a git repo, the list will be empty
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+
+""" }}}
+
+""" Additional Keymappings {{{
+
 imap jj <ESC>
 imap jk <ESC>
 imap kk <ESC>
@@ -369,12 +370,26 @@ imap kk <ESC>
 " Join lines with K
 nnoremap K i<CR><Esc>
 
-nnoremap <silent>,bd :<C-u>bd<cr>
-nnoremap <silent><space>w :<C-u>bd<CR>
-nnoremap <silent>,bda :<C-u>bufdo bd<cr>
-nnoremap <silent>,bdo :<C-u>BufOnly<cr>
+" nnoremap <silent>,bd :<C-u>bd<cr>
+" nnoremap <silent><space>w :<C-u>bd<CR>
+" nnoremap <silent>,bda :<C-u>bufdo bd<cr>
+" nnoremap <silent>,bdo :<C-u>BufOnly<cr>
 
 nnoremap <space>/ :<C-u>nohlsearch<cr>
 
+" Move selection up/down
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+"" To train me to not use the arrow keys!:
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+imap <up> <nop>
+imap <down> <nop>
+
+""" }}}
+
+" vim: tw=70 fdm=marker fmr={{{,}}} fdl=0 fen 

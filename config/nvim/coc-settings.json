@@ -21,10 +21,13 @@
     "t": "action:tabe",
     "v": "action:vsplit",
     "s": "action:split",
-    "d": "expr:GetDeleteAction"
   },
   "list.insertMappings": {
     "<C-t>": "action:tabe",
-    "<C-w>": "command:wincmd k"
+    "<C-w>": "command:wincmd k",
+    "<C-n>": "normal:j",
+    "<C-p>": "normal:k",
+    "<up>": "feedkeys:\\<nop>",
+    "<down>" : "feedkeys:\\<nop>" 
   }
 }
