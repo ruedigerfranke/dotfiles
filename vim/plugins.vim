@@ -8,6 +8,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
@@ -26,6 +27,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'rakr/vim-one'
 
 Plug 'ryanoasis/vim-devicons'
+
+Plug 'mhinz/vim-startify'
 
 " Testing
 Plug 'liuchengxu/vim-clap'
