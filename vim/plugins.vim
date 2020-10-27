@@ -20,6 +20,8 @@ Plug 'wakatime/vim-wakatime'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" Plug 'itchyny/lightline.vim'
+" Plug 'josa42/vim-lightline-coc'
 
 Plug 'rakr/vim-one'
 

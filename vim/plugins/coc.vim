@@ -98,21 +98,6 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 
-" key mappings
-nnoremap <silent> <space><space> :<C-u>CocList<CR>
-nnoremap <silent> <space>a       :<C-u>CocList diagnostics<CR>
-nnoremap <silent> <space>d       :<C-u>CocList diagnostics --current-buf<CR>
-nnoremap <silent> <space>c       :<C-u>CocList commands<CR>
-nnoremap <silent> <space>e       :<C-u>CocCommand explorer<CR>
-nnoremap <silent> <space>f       :<C-u>CocCommand explorer --preset floating<CR>
-nnoremap <silent> <space>l       :<C-u>CocList location<CR>
-nnoremap <silent> <space>o       :<C-u>CocList outline<CR>
-nnoremap <silent> <space>s       :<C-u>CocList symbols<CR>
-nnoremap <silent> <space>h       :<C-u>CocList mru<CR>
-nnoremap <silent> <space>p       :<C-u>CocListResume<CR>
-nnoremap <silent> <C-p>          :<C-u>CocList files<CR>
-nnoremap <silent> <space>b       :<C-u>CocList buffers<CR>
-
 
 " Configuration for coc-explorer
 let g:coc_explorer_global_presets = {

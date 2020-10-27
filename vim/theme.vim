@@ -51,3 +51,17 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Do not draw separators for empty sections (only for the active window) >
 let g:airline_skip_empty_sections = 1
+
+
+
+" " Lightline
+
+" let g:lightline = {
+"   \   'colorscheme': 'one',
+"   \   'active': {
+"   \     'left': [[ 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
+"   \   }
+"   \ }
+
+" " register compoments:
+" call lightline#coc#register()
