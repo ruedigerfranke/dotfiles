@@ -6,6 +6,7 @@
     "typescript",
     "typescriptreact"
   ],
+  "solargraph.commandPath": "/Users/rfranke/.rvm/gems/ruby-2.6.3/bin/solargraph",
   "solargraph.useBundler": true,
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
@@ -28,6 +29,13 @@
     "<C-n>": "normal:j",
     "<C-p>": "normal:k",
     "<up>": "feedkeys:\\<nop>",
-    "<down>" : "feedkeys:\\<nop>" 
+    "<down>" : "feedkeys:\\<nop>"
+  },
+  "explorer.width": 30,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.keyMappings": {
+    "<cr>": ["expandable?", "expand", "open"],
+    "v": "open:vsplit"
   }
 }

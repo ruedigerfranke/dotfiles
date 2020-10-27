@@ -79,10 +79,10 @@ plugins=(
   rails
   ruby
   rvm
-  vscode
-  wd
   vi-mode
-  # zsh-autosuggestions
+  vscode
+  wakatime
+  wd
   zsh-syntax-highlighting
 )
 
@@ -147,6 +147,7 @@ export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
 # Alias für Rails Bundler
 alias bi="bundle install"
+alias rup="bundle install && yarn install"
 
 # Alias für MAMP PHP
 alias phpmamp='/Applications/MAMP/bin/php/php7.2.1/bin/php -c "/Library/Application Support/appsolute/MAMP PRO/conf/php7.2.1.ini"'
@@ -271,6 +272,11 @@ alias ssh="TERM=xterm-256color ssh"
 # zle -N zle-line-init
 # echo -ne '\e[5 q' # Use beam shape cursor on startup.
 # preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+#
+# Configuration for bat (https://github.com/sharkdp/bat)
+export BAT_PAGER="less -RF"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
