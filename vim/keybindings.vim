@@ -9,16 +9,13 @@ imap kk <ESC>
 " Join lines with K
 nnoremap K i<CR><Esc>
 
-" nnoremap <silent>,bd :<C-u>bd<cr>
-" nnoremap <silent><space>w :<C-u>bd<CR>
-" nnoremap <silent>,bda :<C-u>bufdo bd<cr>
-" nnoremap <silent>,bdo :<C-u>BufOnly<cr>
-
-nnoremap <space>/ :<C-u>nohlsearch<cr>
-
 " Move selection up/down
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" Keep selection when indenting
+vnoremap > >gv
+vnoremap < <gv
 
 "" Better navigation using ctrl + {h,j,k,l}
 inoremap <C-h> <C-\><C-N><C-w>h
@@ -48,13 +45,16 @@ nnoremap <silent> <space>d       :<C-u>CocList diagnostics --current-buf<CR>
 nnoremap <silent> <space>e       :<C-u>CocCommand explorer<CR>
 nnoremap <silent> <space>f       :<C-u>CocCommand explorer --preset floating<CR>
 nnoremap <silent> <space>g       :<C-u>CocList grep<CR>
+nnoremap <silent> <space>G       :<C-u>Git<CR>
 nnoremap <silent> <space>h       :<C-u>CocList mru<CR>
 nnoremap <silent> <space>l       :<C-u>CocList location<CR>
 nnoremap <silent> <space>o       :<C-u>CocList outline<CR>
 nnoremap <silent> <space>p       :<C-u>CocListResume<CR>
 nnoremap <silent> <space>q       :<C-u>qall<CR>
-nnoremap <silent> <space>r       :<C-u>so $MYVIMRC<CR>
+nnoremap <space>r                :<C-u>so $MYVIMRC<CR>
 nnoremap <silent> <space>s       :<C-u>CocList symbols<CR>
 nnoremap <silent> <space>w       :<C-u>bd<CR>
-nnoremap <silent> <space>y       :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent> <space>W       :<C-u>w\|bd<CR>
+nnoremap <silent> <space>y       :<C-u>CocList -A --normal yank<CR>
+nnoremap <silent> <space>/       :<C-u>nohlsearch<CR>
 
