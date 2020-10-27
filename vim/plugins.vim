@@ -11,6 +11,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 
+Plug 'psliwka/vim-smoothie'
+
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
 Plug 'junegunn/fzf.vim' " needed for previews
 Plug 'pbogut/fzf-mru.vim'
@@ -32,5 +34,6 @@ Plug 'mhinz/vim-startify'
 
 " Testing
 Plug 'liuchengxu/vim-clap'
+Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
