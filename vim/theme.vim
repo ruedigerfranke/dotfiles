@@ -52,7 +52,16 @@ let g:airline#extensions#tabline#enabled = 1
 " Do not draw separators for empty sections (only for the active window) >
 let g:airline_skip_empty_sections = 1
 
+" More minimal look for airline lines
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+
+let g:airline#extensions#tabline#show_close_button = 1
 
 " " Lightline
 
