@@ -31,9 +31,12 @@ Plug 'rakr/vim-one'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
 " Testing
 Plug 'liuchengxu/vim-clap'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'AndrewRadev/tagalong.vim'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'bogado/file-line'
 
 call plug#end()

@@ -276,6 +276,9 @@ alias ssh="TERM=xterm-256color ssh"
 # Configuration for bat (https://github.com/sharkdp/bat)
 export BAT_PAGER="less -RF"
 
+# Set variable vor vagrant home
+export VAGRANT_HOME="/Volumes/Rüds SSD1/vagrant_home"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

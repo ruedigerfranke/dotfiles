@@ -50,11 +50,11 @@ nnoremap <silent> <space>h       :<C-u>CocList mru<CR>
 nnoremap <silent> <space>l       :<C-u>CocList location<CR>
 nnoremap <silent> <space>o       :<C-u>CocList outline<CR>
 nnoremap <silent> <space>p       :<C-u>CocListResume<CR>
-nnoremap <silent> <space>q       :<C-u>qall<CR>
+" nnoremap <silent> <space>q       :<C-u>qall<CR>
 nnoremap <space>r                :<C-u>so $MYVIMRC<CR>
 nnoremap <silent> <space>s       :<C-u>CocList symbols<CR>
-nnoremap <silent> <space>w       :<C-u>bd<CR>
-nnoremap <silent> <space>W       :<C-u>w\|bd<CR>
+" nnoremap <silent> <space>w       :<C-u>bd<CR>
+" nnoremap <silent> <space>W       :<C-u>w\|bd<CR>
 nnoremap <silent> <space>y       :<C-u>CocList -A --normal yank<CR>
 nnoremap <silent> <space>/       :<C-u>nohlsearch<CR>
 
