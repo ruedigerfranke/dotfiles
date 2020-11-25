@@ -1,14 +1,14 @@
-"   
-"    .o8                           o8o                             o8o                    
-"    "888                           `"'                             `"'                    
-"     888oooo.   .oooo.    .oooo.o oooo   .ooooo.      oooo    ooo oooo  ooo. .oo.  .oo.   
-"     d88' `88b `P  )88b  d88(  "8 `888  d88' `"Y8      `88.  .8'  `888  `888P"Y88bP"Y88b  
-"     888   888  .oP"888  `"Y88b.   888  888             `88..8'    888   888   888   888  
-"     888   888 d8(  888  o.  )88b  888  888   .o8 .o.    `888'     888   888   888   888  
-"     `Y8bod8P' `Y888""8o 8""888P' o888o `Y8bod8P' Y8P     `8'     o888o o888o o888o o888o 
+"
+"    .o8                           o8o                             o8o
+"    "888                           `"'                             `"'
+"     888oooo.   .oooo.    .oooo.o oooo   .ooooo.      oooo    ooo oooo  ooo. .oo.  .oo.
+"     d88' `88b `P  )88b  d88(  "8 `888  d88' `"Y8      `88.  .8'  `888  `888P"Y88bP"Y88b
+"     888   888  .oP"888  `"Y88b.   888  888             `88..8'    888   888   888   888
+"     888   888 d8(  888  o.  )88b  888  888   .o8 .o.    `888'     888   888   888   888
+"     `Y8bod8P' `Y888""8o 8""888P' o888o `Y8bod8P' Y8P     `8'     o888o o888o o888o o888o
 "
 " Initialized via dotfiles/init.vim
-                                                                                      
+
 set nocompatible            " be iMproved, required
 set hidden
 set autoread
@@ -35,11 +35,11 @@ set nowrap
 
 set mouse=a
 
-set cmdheight=2
+set cmdheight=1
 
 set ignorecase
 set smartcase
-set hlsearch                                                     
+set hlsearch
 
 set updatetime=300
 

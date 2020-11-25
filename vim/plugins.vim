@@ -33,10 +33,14 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
+Plug 'bogado/file-line'
+
 " Testing
 Plug 'liuchengxu/vim-clap'
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'bogado/file-line'
+
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'romgrk/barbar.nvim'
 
 call plug#end()

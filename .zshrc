@@ -19,7 +19,7 @@ source ~/.iterm2_shell_integration.zsh
 # ZSH_THEME="ys"
 # ZSH_THEME="agnoster"
 # ZSH_THEME="powerlevel9k/powerlevel9k"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -274,12 +274,14 @@ alias ssh="TERM=xterm-256color ssh"
 # preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 #
 # Configuration for bat (https://github.com/sharkdp/bat)
-export BAT_PAGER="less -RF"
+# export BAT_PAGER="less -RF"
 
 # Set variable vor vagrant home
 export VAGRANT_HOME="/Volumes/Rüds SSD1/vagrant_home"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(starship init zsh)"

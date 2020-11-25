@@ -39,3 +39,5 @@
 	trustExitCode = true
 [icdiff]
 	options = --line-numbers
+[pull]
+	rebase = false
