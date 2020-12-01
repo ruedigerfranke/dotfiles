@@ -74,6 +74,7 @@ plugins=(
   docker
   docker-compose
   git
+  gitfast
   iterm2
   osx
   rails
