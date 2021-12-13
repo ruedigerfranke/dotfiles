@@ -47,3 +47,9 @@ set updatetime=300
 set splitbelow          " Horizontal split below current.
 set splitright          " Vertical split to right of current.
 
+" Show invisible characters
+set list
+set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:⏎,precedes:«,extends:»
+
+let mapleader = "\<space>"
+

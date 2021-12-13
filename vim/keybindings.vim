@@ -10,8 +10,8 @@ imap kk <ESC>
 nnoremap K i<CR><Esc>
 
 " Insert new line below or above without going to insert mode
-nnoremap <silent> <space>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
-nnoremap <silent> <space>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
+nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
+nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
 
 " Move selection up/down
 vnoremap J :m '>+1<CR>gv=gv
@@ -20,6 +20,9 @@ vnoremap K :m '<-2<CR>gv=gv
 " Keep selection when indenting
 vnoremap > >gv
 vnoremap < <gv
+
+" Y behavior like D, etc.
+nnoremap Y y$
 
 "" Better navigation using ctrl + {h,j,k,l}
 " inoremap <C-h> <C-\><C-N><C-w>h
@@ -45,61 +48,80 @@ map <right> <nop>
 
 imap <up> <nop>
 imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
+" imap <left> <nop>
+" imap <right> <nop>
 
-"" Space released keybindings, mainly for COC
+"  Space released keybindings, mainly for COC
 
-nnoremap <silent> <C-p>          :<C-u>CocList files<CR>
-nnoremap <silent> <space><space> :<C-u>CocList<CR>
-nnoremap <silent> <space>a       :<C-u>CocList diagnostics<CR>
-nnoremap <silent> <space>b       :<C-u>CocList buffers<CR>
-nnoremap <silent> <space>c       :<C-u>CocList commands<CR>
-nnoremap <silent> <space>d       :<C-u>CocList diagnostics --current-buf<CR>
-nnoremap <silent> <space>e       :<C-u>CocCommand explorer<CR>
-nnoremap <silent> <space>f       :<C-u>CocCommand explorer --preset floating<CR>
-nnoremap <silent> <space>g       :<C-u>CocList grep<CR>
-nnoremap <silent> <space>G       :<C-u>Git<CR>
-nnoremap <silent> <space>h       :<C-u>CocList mru<CR>
-nnoremap <silent> <space>l       :<C-u>CocList location<CR>
-nnoremap <silent> <space>p       :<C-u>CocListResume<CR>
-" nnoremap <silent> <space>q       :<C-u>qall<CR>
-nnoremap <space>r                :<C-u>so $MYVIMRC<CR>
-nnoremap <silent> <space>s       :<C-u>CocList outline<CR>
-nnoremap <silent> <space>S       :<C-u>CocList symbols<CR>
-" nnoremap <silent> <space>w       :<C-u>bd<CR>
-" nnoremap <silent> <space>W       :<C-u>w\|bd<CR>
-nnoremap <silent> <space>y       :<C-u>CocList -A --normal yank<CR>
-nnoremap <silent> <space>/       :<C-u>nohlsearch<CR>
+nnoremap <silent> <C-p>            :<C-u>CocList files<CR>
+nnoremap <silent> <leader><leader> :<C-u>CocList<CR>
+nnoremap <silent> <leader>b        :<C-u>CocList buffers<CR>
+nnoremap <silent> <leader>c        :<C-u>CocList commands<CR>
+nnoremap <silent> <leader>D        :<C-u>CocList diagnostics<CR>
+nnoremap <silent> <leader>e        :<C-u>CocCommand explorer<CR>
+nnoremap <silent> <leader>E        :<C-u>CocCommand explorer --preset floating<CR>
+nnoremap <silent> <leader>f        :<C-u>CocList files<CR>
+nnoremap <silent> <leader>g        :<C-u>CocList grep<CR>
+" nnoremap <silent> <leader>g       :<C-u>Git<CR>
+" nnoremap <leader>g                :<C-u>set operatorfunc=<SID>GrepFromSelected<CR>g@
+nnoremap <silent> <leader>gb       :<c-u>Gblame<CR>
+nnoremap <silent> <leader>gd       :<C-u>Gvdiff<CR>
+nnoremap <silent> <leader>gf       :<C-u>diffget //2<CR>
+nnoremap <silent> <leader>gg       :<C-u>Gbrowse<CR>
+nnoremap <silent> <leader>gj       :<C-u>diffget //3<CR>
+nnoremap <silent> <leader>h        :<C-u>CocList mru<CR>
+nnoremap <silent> <leader>l        :<C-u>CocList location<CR>
+nnoremap <silent> <leader>n        <Plug>(coc-diagnostic-next)
+nnoremap <silent> <leader>N        <Plug>(coc-diagnostic-prev)
+nnoremap <silent> <leader>p        :<C-u>CocList -A --normal yank<CR>
+nnoremap <silent> <leader>r        :<C-u>CocListResume<CR>
+nnoremap <leader>R                 :<C-u>so $MYVIMRC<CR>
+nnoremap <silent> <leader>s        :<C-u>CocList outline<CR>
+nnoremap <silent> <leader>S        :<C-u>CocList symbols<CR>
+nnoremap <silent> <leader>y        "+y
+
+let hlstate=0
+nnoremap <silent> <leader>/       :if (hlstate == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=1-hlstate<cr>
+"knnoremap <silent> <leader>/       :<C-u>nohlsearch<CR>
+
+"" Mappings for visual mode
+
+" Mappings for grep (coc-list grep)
+vnoremap <leader>g                :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
+" Yank to clipboard for visual mode
+vnoremap <leader>y                "+y
+
+xnoremap @                        :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 
 "" Mappings for barbar.nvim
 
 " Magic buffer-picking mode
-nnoremap <silent> <C-s> :BufferPick<CR>
+nnoremap <silent> <C-s>           :BufferPick<CR>
 " Sort automatically by...
-nnoremap <silent> <Space>bd :BufferOrderByDirectory<CR>
-nnoremap <silent> <Space>bl :BufferOrderByLanguage<CR>
+nnoremap <silent> <leader>bd      :BufferOrderByDirectory<CR>
+nnoremap <silent> <leader>bl      :BufferOrderByLanguage<CR>
 " Move to previous/next
-nnoremap <silent> <A-,> :BufferPrevious<CR>
-nnoremap <silent> <A-.> :BufferNext<CR>
+nnoremap <silent> <M-,>           :BufferPrevious<CR>
+nnoremap <silent> <M-.>           :BufferNext<CR>
 " Re-order to previous/next
-nnoremap <silent> <A-<> :BufferMovePrevious<CR>
-nnoremap <silent> <A->> :BufferMoveNext<CR>
+nnoremap <silent> <M-<>           :BufferMovePrevious<CR>
+nnoremap <silent> <M->>           :BufferMoveNext<CR>
 " Goto buffer in position...
-nnoremap <silent> <A-1> :BufferGoto 1<CR>
-nnoremap <silent> <A-2> :BufferGoto 2<CR>
-nnoremap <silent> <A-3> :BufferGoto 3<CR>
-nnoremap <silent> <A-4> :BufferGoto 4<CR>
-nnoremap <silent> <A-5> :BufferGoto 5<CR>
-nnoremap <silent> <A-6> :BufferGoto 6<CR>
-nnoremap <silent> <A-7> :BufferGoto 7<CR>
-nnoremap <silent> <A-8> :BufferGoto 8<CR>
-nnoremap <silent> <A-9> :BufferLast<CR>
+nnoremap <silent> <M-1>           :BufferGoto 1<CR>
+nnoremap <silent> <M-2>           :BufferGoto 2<CR>
+nnoremap <silent> <M-3>           :BufferGoto 3<CR>
+nnoremap <silent> <M-4>           :BufferGoto 4<CR>
+nnoremap <silent> <M-5>           :BufferGoto 5<CR>
+nnoremap <silent> <M-6>           :BufferGoto 6<CR>
+nnoremap <silent> <M-7>           :BufferGoto 7<CR>
+nnoremap <silent> <M-8>           :BufferGoto 8<CR>
+nnoremap <silent> <M-9>           :BufferLast<CR>
 " Close buffer
-nnoremap <silent> <A-c> :BufferClose<CR>
+nnoremap <silent> <M-c>           :BufferClose<CR>
 " Wipeout buffer
 "                          :BufferWipeout<CR>
 " Other:
 " :BarbarEnable - enables barbar (enabled by default)
 " :BarbarDisable - very bad command, should never be used
+

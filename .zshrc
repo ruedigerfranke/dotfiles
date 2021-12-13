@@ -1,9 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -16,6 +16,7 @@ source ~/.iterm2_shell_integration.zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# ZSH_THEME="robbyrussell"
 # ZSH_THEME="ys"
 # ZSH_THEME="agnoster"
 # ZSH_THEME="powerlevel9k/powerlevel9k"
@@ -71,12 +72,15 @@ source ~/.iterm2_shell_integration.zsh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  bundler
+  command-not-found
   docker
   docker-compose
   git
   gitfast
   iterm2
-  osx
+  macos
+  per-directory-history
   rails
   ruby
   rvm
@@ -84,6 +88,7 @@ plugins=(
   vscode
   wakatime
   wd
+  yarn
   zsh-syntax-highlighting
 )
 
@@ -147,13 +152,16 @@ export PATH="$PATH:$HOME/.composer/vendor/bin"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
 # Alias für Rails Bundler
-alias bi="bundle install"
-alias rup="bundle install && yarn install"
+# alias bi="bundle install"
+# alias rup="bundle install && yarn install"
 
 # Alias für MAMP PHP
 alias phpmamp='/Applications/MAMP/bin/php/php7.2.1/bin/php -c "/Library/Application Support/appsolute/MAMP PRO/conf/php7.2.1.ini"'
 alias pear='/Applications/MAMP/bin/php/php7.2.1/bin/pear'
 alias pecl='/Applications/MAMP/bin/php/php7.2.1/bin/pecl'
+
+# Check before commit (rails)
+alias cbc="rubocop --only-recognized-file-types --force-exclusion `git status -s | awk '{ print $2 }' | tr -s '\r\n' ' ' | sed -r 's/ %//' | awk '{$1=$1};1'`"
 
 # Flutter to path
 export PATH="$PATH:$HOME/lib/flutter/bin"
@@ -165,8 +173,8 @@ export PATH="$PATH:$HOME/lib/flutter/bin"
 # Add Python User bin to path
 export PATH="$PATH:/Users/rfranke/Library/Python/2.7/bin"
 
-# export EDITOR="code --wait"
-export EDITOR="vim"
+export EDITOR="code --wait"
+# export EDITOR="vim"
 
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
@@ -180,6 +188,9 @@ bindkey "^[OA" up-line-or-beginning-search
 bindkey "^[OB" down-line-or-beginning-search
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
+
+# Reload zsh configuration by using `reload` as command
+alias reload=". ~/.zshrc"
 
 # Updates editor information when the keymap changes.
 function zle-keymap-select() {
@@ -277,12 +288,52 @@ alias ssh="TERM=xterm-256color ssh"
 # Configuration for bat (https://github.com/sharkdp/bat)
 # export BAT_PAGER="less -RF"
 
+# Fix regarding to directory_based_history
+TRAPWINCH() {
+  zle && { zle reset-prompt; zle -R }
+}
+
+# export PER_DIRECTORY_HISTORY_TOGGLE='^H'
+bindkey '^G' per-directory-history-toggle-history
+
 # Set variable vor vagrant home
 export VAGRANT_HOME="/Volumes/Rüds SSD1/vagrant_home"
+
+# Use bat as man page reader
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# Use bat instead of cat
+alias cat="bat"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(starship init zsh)"
+

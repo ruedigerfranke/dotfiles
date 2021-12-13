@@ -2,7 +2,7 @@
 
 [user]
 	name = Rüdiger Franke
-	email = mail@ruedigerfranke.net
+	email = ruediger.franke@gmail.com
 [core]
 	excludesfile = /Users/rfranke/.gitignore_global
 	commentchar = ";"
@@ -41,3 +41,8 @@
 	options = --line-numbers
 [pull]
 	rebase = false
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

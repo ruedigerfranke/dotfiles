@@ -1,7 +1,7 @@
 " MacVim specific configuration by Rüdiger Franke
 
 set macligatures
-set guifont=OperatorMonoSSm\ Nerd\ Font:h13
+set guifont=OperatorMonoSSm\ Nerd\ Font:h12
 " set guifont=Operator\ Mono\ SSm\ Lig:h12
 " set guifont=JetBrains\ Mono\ Medium:h13
 
@@ -38,3 +38,5 @@ noremap <D-8> :tabn 8<CR>
 noremap <D-9> :tabn 9<CR>
 " Command-0 goes to the last tab
 noremap <D-0> :tablast<CR>
+
+autocmd! GUIEnter * set vb t_vb=

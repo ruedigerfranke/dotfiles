@@ -20,6 +20,7 @@ source $HOME/dotfiles/vim/plugins/coc.vim
 source $HOME/dotfiles/vim/plugins/fzf.vim
 source $HOME/dotfiles/vim/plugins/startify.vim
 source $HOME/dotfiles/vim/plugins/sayonara.vim
+source $HOME/dotfiles/vim/plugins/fugitive-gitlab.vim
 
 source $HOME/dotfiles/vim/theme.vim
 source $HOME/dotfiles/vim/helper.vim

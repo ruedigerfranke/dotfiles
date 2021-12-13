@@ -10,7 +10,7 @@ module.exports = {
     updateChannel: "stable",
 
     // default font size in pixels for all tabs
-    fontSize: 14,
+    fontSize: 12,
 
     // font family with optional fallbacks
     // "Operator Mono SSm"

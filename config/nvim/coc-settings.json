@@ -6,10 +6,15 @@
     "typescript",
     "typescriptreact"
   ],
-  "solargraph.commandPath": "/Users/rfranke/.rvm/gems/ruby-2.6.3/bin/solargraph",
-  "solargraph.useBundler": true,
+  "solargraph.commandPath": "/Users/rfranke/.rvm/gems/ruby-2.5.1/bin/solargraph",
+  "solargraph.useBundler": false,
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
+  //"solargraph.transport": "external",
+  //"solargraph.externalServer": {
+  //    "host": "localhost",
+  //    "port": 7658
+  //},
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "Markdown",
