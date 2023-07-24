@@ -1,6 +1,6 @@
 " Some addtional keybindings for convienence by Rüdiger Franke
-"
 
+" Get out of insert mode
 imap jj <ESC>
 imap jk <ESC>
 imap kj <ESC>
@@ -24,13 +24,28 @@ vnoremap < <gv
 " Y behavior like D, etc.
 nnoremap Y y$
 
+" Yank and paste from clipboard
+nnoremap <leader>y "+y
+nnoremap <leader>yy "+yy
+nnoremap <leader>Y "+y$
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+
+" Replace selection
+xnoremap <leader>p "_dP
+
+" Visually select to end of line and content of line
+nnoremap <leader>V v$h
+nnoremap <leader>vv ^v$h
+
 "" Better navigation using ctrl + {h,j,k,l}
 " inoremap <C-h> <C-\><C-N><C-w>h
 " inoremap <C-j> <C-\><C-N><C-w>j
 " inoremap <C-k> <C-\><C-N><C-w>k
 " inoremap <C-l> <C-\><C-N><C-w>l
 nnoremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
+nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
@@ -39,6 +54,12 @@ inoremap <C-h> <left>
 inoremap <C-j> <down>
 inoremap <C-k> <up>
 inoremap <C-l> <right>
+
+"" Adjust scrolling behavior
+" nnoremap <C-u> <C-u>zz
+" nnoremap <C-d> <C-d>zz
+" nnoremap <C-f> <C-f>zz
+" nnoremap <C-b> <C-b>zz
 
 "" To train me to not use the arrow keys!:
 map <up> <nop>
@@ -51,46 +72,63 @@ imap <down> <nop>
 " imap <left> <nop>
 " imap <right> <nop>
 
-"  Space released keybindings, mainly for COC
-
-nnoremap <silent> <C-p>            :<C-u>CocList files<CR>
-nnoremap <silent> <leader><leader> :<C-u>CocList<CR>
-nnoremap <silent> <leader>b        :<C-u>CocList buffers<CR>
-nnoremap <silent> <leader>c        :<C-u>CocList commands<CR>
-nnoremap <silent> <leader>D        :<C-u>CocList diagnostics<CR>
-nnoremap <silent> <leader>e        :<C-u>CocCommand explorer<CR>
-nnoremap <silent> <leader>E        :<C-u>CocCommand explorer --preset floating<CR>
-nnoremap <silent> <leader>f        :<C-u>CocList files<CR>
-nnoremap <silent> <leader>g        :<C-u>CocList grep<CR>
-" nnoremap <silent> <leader>g       :<C-u>Git<CR>
-" nnoremap <leader>g                :<C-u>set operatorfunc=<SID>GrepFromSelected<CR>g@
-nnoremap <silent> <leader>gb       :<c-u>Gblame<CR>
-nnoremap <silent> <leader>gd       :<C-u>Gvdiff<CR>
-nnoremap <silent> <leader>gf       :<C-u>diffget //2<CR>
-nnoremap <silent> <leader>gg       :<C-u>Gbrowse<CR>
-nnoremap <silent> <leader>gj       :<C-u>diffget //3<CR>
-nnoremap <silent> <leader>h        :<C-u>CocList mru<CR>
-nnoremap <silent> <leader>l        :<C-u>CocList location<CR>
-nnoremap <silent> <leader>n        <Plug>(coc-diagnostic-next)
-nnoremap <silent> <leader>N        <Plug>(coc-diagnostic-prev)
-nnoremap <silent> <leader>p        :<C-u>CocList -A --normal yank<CR>
-nnoremap <silent> <leader>r        :<C-u>CocListResume<CR>
-nnoremap <leader>R                 :<C-u>so $MYVIMRC<CR>
-nnoremap <silent> <leader>s        :<C-u>CocList outline<CR>
-nnoremap <silent> <leader>S        :<C-u>CocList symbols<CR>
-nnoremap <silent> <leader>y        "+y
-
 let hlstate=0
 nnoremap <silent> <leader>/       :if (hlstate == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=1-hlstate<cr>
 "knnoremap <silent> <leader>/       :<C-u>nohlsearch<CR>
 
-"" Mappings for visual mode
+if has('nvim')
+  " Leader released keybindings, mainly for Telescope & COC
+  nnoremap <silent> <C-p>            :<C-u>Telescope find_files hidden=true<CR>
+  nnoremap <silent> <leader><leader> :<C-u>Telescope coc<CR>
+  nnoremap <silent> <leader>b        :<C-u>Telescope buffers<CR>
+  nnoremap <silent> <leader>c        :<C-u>Telescope coc commands<CR>
+  nnoremap <silent> <leader>D        :<C-u>Telescope coc diagnostics<CR>
+  nnoremap <silent> <leader>e        :<C-u>CocCommand explorer<CR>
+  nnoremap <silent> <leader>E        :<C-u>CocCommand explorer --preset floating<CR>
+  nnoremap <silent> <leader>f        :<C-u>Telescope find_files hidden=true<CR>
+  nnoremap <silent> <leader>g        :<C-u>Telescope live_grep<CR>
+  nnoremap <silent> <leader>h        :<C-u>Telescope coc mru<CR>
+  nnoremap <silent> <leader>l        :<C-u>Telescope coc locations<CR>
+  nnoremap <silent> <leader>n        <Plug>(coc-diagnostic-next)
+  nnoremap <silent> <leader>N        <Plug>(coc-diagnostic-prev)
+  " nnoremap <silent> <leader>p        :<C-u>CocList -A --normal yank<CR>
+  nnoremap <silent> <leader>r        :<C-u>Telescope resume<CR>
+  nnoremap <leader>R                 :<C-u>so $MYVIMRC<CR>
+  nnoremap <silent> <leader>s        :<C-u>Telescope coc document_symbols<CR>
+  nnoremap <silent> <leader>S        :<C-u>Telescope coc workspace_symbols<CR>
+else
+  " Leader released keybindings, mainly for COC
+  nnoremap <silent> <C-p>            :<C-u>CocList files<CR>
+  nnoremap <silent> <leader><leader> :<C-u>CocList<CR>
+  nnoremap <silent> <leader>b        :<C-u>CocList buffers<CR>
+  nnoremap <silent> <leader>c        :<C-u>CocList commands<CR>
+  nnoremap <silent> <leader>D        :<C-u>CocList diagnostics<CR>
+  nnoremap <silent> <leader>e        :<C-u>CocCommand explorer<CR>
+  nnoremap <silent> <leader>E        :<C-u>CocCommand explorer --preset floating<CR>
+  nnoremap <silent> <leader>f        :<C-u>CocList files<CR>
+  nnoremap <silent> <leader>g        :<C-u>CocList grep<CR>
+  nnoremap <silent> <leader>h        :<C-u>CocList mru<CR>
+  nnoremap <silent> <leader>l        :<C-u>CocList location<CR>
+  nnoremap <silent> <leader>n        <Plug>(coc-diagnostic-next)
+  nnoremap <silent> <leader>N        <Plug>(coc-diagnostic-prev)
+  " nnoremap <silent> <leader>p        :<C-u>CocList -A --normal yank<CR>
+  nnoremap <silent> <leader>r        :<C-u>CocListResume<CR>
+  nnoremap <leader>R                 :<C-u>so $MYVIMRC<CR>
+  nnoremap <silent> <leader>s        :<C-u>CocList outline<CR>
+  nnoremap <silent> <leader>S        :<C-u>CocList symbols<CR>
+endif
+
+" Git related keybindings
+nnoremap <silent> <leader>gb       :<c-u>Git blame<CR>
+nnoremap <silent> <leader>gd       :<C-u>Gvdiff<CR>
+nnoremap <silent> <leader>gf       :<C-u>diffget //2<CR>
+nnoremap <silent> <leader>gg       :<C-u>GBrowse<CR>
+nnoremap <silent> <leader>gj       :<C-u>diffget //3<CR>
 
 " Mappings for grep (coc-list grep)
 vnoremap <leader>g                :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
-" Yank to clipboard for visual mode
-vnoremap <leader>y                "+y
 
+" Mapping for execute marco for visual selection
 xnoremap @                        :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 

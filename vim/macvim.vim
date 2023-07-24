@@ -1,11 +1,11 @@
 " MacVim specific configuration by Rüdiger Franke
 
 set macligatures
-set guifont=OperatorMonoSSm\ Nerd\ Font:h12
-" set guifont=Operator\ Mono\ SSm\ Lig:h12
+set guifont=OperatorMonoSSm\ Nerd\ Font:h13
+" set guifont=Operator\ Mono\ SSm\ Lig:h13
 " set guifont=JetBrains\ Mono\ Medium:h13
 
-set linespace=3
+set linespace=0
 
 set background=dark
 
@@ -40,3 +40,7 @@ noremap <D-9> :tabn 9<CR>
 noremap <D-0> :tablast<CR>
 
 autocmd! GUIEnter * set vb t_vb=
+
+" Adjust FZF Configuration
+let g:fzf_layout = { 'down': '~40%' }
+

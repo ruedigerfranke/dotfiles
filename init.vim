@@ -12,22 +12,37 @@
 "   To use put the following line into your ~/.vimrc
 "   `source $HOME/dotfiles/init.vim`
 
-source $HOME/dotfiles/vim/basic.vim
-source $HOME/dotfiles/vim/plugins.vim
+if exists('g:vscode')
+  " VSCode Neovim Stuff goes here:
+  source $HOME/dotfiles/vim/vscode/init.nvim
+else
+  source $HOME/dotfiles/vim/basic.vim
+  source $HOME/dotfiles/vim/plugins.vim
 
-source $HOME/dotfiles/vim/plugins/endwise.vim
-source $HOME/dotfiles/vim/plugins/coc.vim
-source $HOME/dotfiles/vim/plugins/fzf.vim
-source $HOME/dotfiles/vim/plugins/startify.vim
-source $HOME/dotfiles/vim/plugins/sayonara.vim
-source $HOME/dotfiles/vim/plugins/fugitive-gitlab.vim
+  source $HOME/dotfiles/vim/plugins/endwise.vim
+  source $HOME/dotfiles/vim/plugins/coc.vim
+  source $HOME/dotfiles/vim/plugins/fzf.vim
+  source $HOME/dotfiles/vim/plugins/startify.vim
+  source $HOME/dotfiles/vim/plugins/sayonara.vim
+  source $HOME/dotfiles/vim/plugins/fugitive-gitlab.vim
 
-source $HOME/dotfiles/vim/theme.vim
-source $HOME/dotfiles/vim/helper.vim
-source $HOME/dotfiles/vim/keybindings.vim
+  if has('nvim')
+    source $HOME/dotfiles/vim/plugins/telescope.vim
+    source $HOME/dotfiles/vim/plugins/treesitter.vim
+    source $HOME/dotfiles/vim/plugins/neoscroll.vim
+  endif
 
-if has("gui_macvim")
-  if has("gui_running")
-    source $HOME/dotfiles/vim/macvim.vim
+  source $HOME/dotfiles/vim/theme.vim
+  source $HOME/dotfiles/vim/helper.vim
+  source $HOME/dotfiles/vim/keybindings.vim
+
+  if has("gui_macvim")
+    if has("gui_running")
+      source $HOME/dotfiles/vim/macvim.vim
+    endif
+  endif
+
+  if exists('g:neovide')
+    source $HOME/dotfiles/vim/neovide.vim
   endif
 endif

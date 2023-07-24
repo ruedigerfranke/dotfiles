@@ -1,0 +1,104 @@
+" Define leader key
+let mapleader = "\<space>"
+
+" Set some basic configuration
+set autoread
+set autoindent
+
+set encoding=utf-8
+
+set noswapfile              " Swap files off, do all the things in memory
+set nobackup
+set nowritebackup
+
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+set ignorecase
+set smartcase
+set hlsearch
+
+" Highlight yank
+augroup highlight_yank
+  autocmd!
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup="IncSearch", timeout=1000 }
+augroup END
+
+" Plugins
+call plug#begin('~/.vim/plugged')
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
+call plug#end()
+
+" Join lines with K
+nnoremap K i<CR><Esc>
+
+" Insert new line below or above without going to insert mode
+nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
+nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
+
+" Move selection up/down
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Keep selection when indenting
+vnoremap > >gv
+vnoremap < <gv
+
+" Y behavior like D, etc.
+nnoremap Y y$
+
+" Yank and paste from clipboard
+nnoremap <leader>y "+y
+nnoremap <leader>yy "+yy
+nnoremap <leader>Y "+y$
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+
+" Replace selection
+xnoremap <leader>p "_dP
+
+" Visually select to end of line and content of line
+nnoremap <leader>V v$h
+nnoremap <leader>vv ^v$h
+
+"" To train me to not use the arrow keys!:
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+imap <up> <nop>
+imap <down> <nop>
+" imap <left> <nop>
+" imap <right> <nop>
+
+let hlstate=0
+nnoremap <silent> <leader>/       :if (hlstate == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=1-hlstate<cr>
+
+" Keymapping for comments
+xmap gc  <Plug>VSCodeCommentary
+nmap gc  <Plug>VSCodeCommentary
+omap gc  <Plug>VSCodeCommentary
+nmap gcc <Plug>VSCodeCommentaryLine
+
+
+" Leader released keybindings
+nnoremap <silent> <C-p>            <Cmd>call VSCodeNotify('workbench.action.quickOpen')<CR>
+nnoremap <silent> <leader><leader> <Cmd>call VSCodeNotify('workbench.action.showCommands')<CR>
+nnoremap <silent> <leader>b        <Cmd>call VSCodeNotify('workbench.action.showAllEditorsByMostRecentlyUsed')<CR>
+nnoremap <silent> <leader>c        <Cmd>call VSCodeNotify('workbench.action.showCommands')<CR>
+nnoremap <silent> <leader>D        <Cmd>call VSCodeNotify('workbench.action.problems.focus')<CR>
+nnoremap <silent> <leader>e        <Cmd>call VSCodeNotify('workbench.explorer.fileView.focus')<CR>
+nnoremap <silent> <leader>f        <Cmd>call VSCodeNotify('workbench.action.quickOpen')<CR>
+nnoremap <silent> <leader>g        <Cmd>call VSCodeNotify('workbench.action.findInFiles')<CR>
+" nnoremap <silent> <leader>h        <Cmd>call VSCodeNotify('')
+" nnoremap <silent> <leader>l        <Cmd>call VSCodeNotify('')
+nnoremap <silent> <leader>n        <Cmd>call VSCodeNotify('editor.action.marker.next')<CR>
+nnoremap <silent> <leader>N        <Cmd>call VSCodeNotify('editor.action.marker.prev')<CR>
+" nnoremap <silent> <leader>r        <Cmd>call VSCodeNotify('')
+nnoremap <leader>R                 :so $MYVIMRC<CR>
+nnoremap <silent> <leader>s        <Cmd>call VSCodeNotify('workbench.action.gotoSymbol')<CR>
+nnoremap <silent> <leader>S        <Cmd>call VSCodeNotify('workbench.action.showAllSymbols')<CR>

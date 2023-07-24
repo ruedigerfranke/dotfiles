@@ -1,4 +1,7 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Fig pre block. Keep at the top of this file.
+# [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+# Fig pre block. Keep at the top of this file.
+# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -11,7 +14,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
-source ~/.iterm2_shell_integration.zsh
+if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+  source ~/.iterm2_shell_integration.zsh
+fi
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -72,10 +77,13 @@ source ~/.iterm2_shell_integration.zsh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  asdf
+  autojump
   bundler
   command-not-found
   docker
   docker-compose
+  fzf
   git
   gitfast
   iterm2
@@ -83,12 +91,12 @@ plugins=(
   per-directory-history
   rails
   ruby
-  rvm
   vi-mode
   vscode
   wakatime
   wd
   yarn
+  z
   zsh-syntax-highlighting
 )
 
@@ -121,12 +129,11 @@ source $ZSH/oh-my-zsh.sh
 #
 alias vimconf="vim ~/.config/nvim/init.vim"
 alias zshconf="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
+# alias ohmyzsh="vim ~/.oh-my-zsh"
+
+alias zshload="source ~/.zshrc"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
 
 # Add language flags for Hyper (Terminal) by Rüdiger 2017-11-27
 export LANG="de_DE.UTF-8"
@@ -139,10 +146,10 @@ export LC_TIME="de_DE.UTF-8"
 export LC_ALL="de_DE.UTF-8"
 
 # Tagesaufstellung für GIT Repo
-alias git-today="git --no-pager log --since=\"0:00\" --author \".*franke.*\" | grep '^\s\s\s\s' | grep -v 'git-svn' | sed 's/^[ \t]*/- /' | grep -v '^-\s$' | tail -r | pbcopy | echo \"Protokoll in die Zwischenablage kopiert\""
+# alias git-today="git --no-pager log --since=\"0:00\" --author \".*franke.*\" | grep '^\s\s\s\s' | grep -v 'git-svn' | sed 's/^[ \t]*/- /' | grep -v '^-\s$' | tail -r | pbcopy | echo \"Protokoll in die Zwischenablage kopiert\""
 
 # Alias für PathFinder
-alias fl="open -a ForkLift"
+# alias fl="open -a ForkLift"
 
 # Benutzer bin Ordner hinzügfügen
 export PATH="$HOME/bin:$PATH"
@@ -151,17 +158,13 @@ export PATH="$HOME/bin:$PATH"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
-# Alias für Rails Bundler
-# alias bi="bundle install"
-# alias rup="bundle install && yarn install"
-
 # Alias für MAMP PHP
-alias phpmamp='/Applications/MAMP/bin/php/php7.2.1/bin/php -c "/Library/Application Support/appsolute/MAMP PRO/conf/php7.2.1.ini"'
-alias pear='/Applications/MAMP/bin/php/php7.2.1/bin/pear'
-alias pecl='/Applications/MAMP/bin/php/php7.2.1/bin/pecl'
+# alias phpmamp='/Applications/MAMP/bin/php/php7.2.1/bin/php -c "/Library/Application Support/appsolute/MAMP PRO/conf/php7.2.1.ini"'
+# alias pear='/Applications/MAMP/bin/php/php7.2.1/bin/pear'
+# alias pecl='/Applications/MAMP/bin/php/php7.2.1/bin/pecl'
 
 # Check before commit (rails)
-alias cbc="rubocop --only-recognized-file-types --force-exclusion `git status -s | awk '{ print $2 }' | tr -s '\r\n' ' ' | sed -r 's/ %//' | awk '{$1=$1};1'`"
+# alias cbc="rubocop --only-recognized-file-types --force-exclusion `git status -s | awk '{ print $2 }' | tr -s '\r\n' ' ' | sed -r 's/ %//' | awk '{$1=$1};1'`"
 
 # Flutter to path
 export PATH="$PATH:$HOME/lib/flutter/bin"
@@ -171,10 +174,10 @@ export PATH="$PATH:$HOME/lib/flutter/bin"
 # export PATH=$PATH:$FIREBIRD_HOME/bin
 
 # Add Python User bin to path
-export PATH="$PATH:/Users/rfranke/Library/Python/2.7/bin"
+# export PATH="$PATH:/Users/rfranke/Library/Python/2.7/bin"
 
-export EDITOR="code --wait"
-# export EDITOR="vim"
+# export EDITOR="code --wait"
+export EDITOR="vim"
 
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
@@ -189,9 +192,6 @@ bindkey "^[OB" down-line-or-beginning-search
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
 
-# Reload zsh configuration by using `reload` as command
-alias reload=". ~/.zshrc"
-
 # Updates editor information when the keymap changes.
 function zle-keymap-select() {
   zle reset-prompt
@@ -200,51 +200,7 @@ function zle-keymap-select() {
 
 zle -N zle-keymap-select
 
-function vi_mode_prompt_info() {
-  echo "${${KEYMAP/vicmd/[% NORMAL]%}/(main|viins)/[% INSERT]%}"
-}
-
-# define right prompt, regardless of whether the theme defined it
-RPS1='$(vi_mode_prompt_info)'
-RPS2=$RPS1
-
-# iTerm Custom Badge -> Use it with \(user.gitStatus)
-function iterm2_print_user_vars() {
-  iterm2_set_user_var gitStatus "$(getGitStatus)"
-}
-
-function getGitStatus {
-  if [[ $(git status 2> /dev/null) = "" ]] then
-    echo "$(topDirWithoutSlash)"
-  else
-    # echo "$(getGitProjectDir)$(topDir) git:($(getGitBranch))$(isGitBranchDirty)"
-    echo "$(getGitProjectDir)"
-  fi
-}
-
-function getGitProjectDir {
-  basename $(git rev-parse --show-toplevel 2> /dev/null ) 2> /dev/null
-}
-
-function topDir {
-  if [[ $(basename $(pwd)) = $(getGitProjectDir) ]] then
-   echo ""
-  else
-   echo "/$(basename $(pwd))"
-  fi
-}
-
-function topDirWithoutSlash {
-  echo "$(basename $(pwd))"
-}
-
-function getGitBranch {
-  basename $(git branch 2> /dev/null | grep \* | cut -c3-) 2> /dev/null
-}
-
-function isGitBranchDirty {
-  [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "⚡ "
-}
+source ~/.config/zsh/iterm_badge.zsh
 
 # Add Homebrew sbin to PATH
 export PATH="/usr/local/sbin:$PATH"
@@ -288,6 +244,30 @@ alias ssh="TERM=xterm-256color ssh"
 # Configuration for bat (https://github.com/sharkdp/bat)
 # export BAT_PAGER="less -RF"
 
+# Aliases for exa
+alias ls='exa --icons'                                                          # ls
+alias l='exa -lbgF --time-style=long-iso --git --icons'                         # list, size, type, git
+alias ll='exa -lbhgF --time-style=long-iso --git --icons'                       # long list
+alias llm='exa -lbghF --git --time-style=long-iso --sort=modified --icons'      # long list, modified date sort
+alias la='exa -alhgF --time-style=long-iso --git --icons'                       # long list, all files
+alias lla='exa -lbhHigUmuSa --time-style=long-iso --git --color-scale --icons'  # all list
+alias llx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --icons' # all + extended list
+
+# Alias: cd to git root directory
+alias cdg='cd $(git rev-parse --show-toplevel)'
+
+# Alias for Rubymine ID
+alias rbym='rubymine .'
+
+# Rubocop aliases & functions
+function cop() {
+  files=$(git status -s | grep -E 'A|M' | awk '{print $2}')
+  files="$files $(git status -s | grep -E 'R' | awk '{print $4}')"
+  echo $files | xargs rubocop $@
+}
+
+alias copa='rubocop'
+
 # Fix regarding to directory_based_history
 TRAPWINCH() {
   zle && { zle reset-prompt; zle -R }
@@ -297,43 +277,45 @@ TRAPWINCH() {
 bindkey '^G' per-directory-history-toggle-history
 
 # Set variable vor vagrant home
-export VAGRANT_HOME="/Volumes/Rüds SSD1/vagrant_home"
+export VAGRANT_HOME="/Volumes/RuedigersSSD1/vagrant_home"
 
 # Use bat as man page reader
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # Use bat instead of cat
 alias cat="bat"
+alias h2h="html2haml -e --ruby19-attributes"
+alias nv="/Applications/Neovide.app/Contents/MacOS/neovide"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# place this after nvm initialization!
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
+# FZF Fuzzy Finder & Autocomplete
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^f' fzf-completion
+bindkey '^I' $fzf_default_completion
+
+if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+else
+  export STARSHIP_CONFIG=~/.config/warp/starship.toml
+fi
+
+# Starship Prompt 🚀
 eval "$(starship init zsh)"
 
+# Fig post block. Keep at the bottom of this file.
+# # >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/usr/local/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/usr/local/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
+        . "/usr/local/Caskroom/miniforge/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/usr/local/Caskroom/miniforge/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# Fig post block. Keep at the bottom of this file.
+# [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"

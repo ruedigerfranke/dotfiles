@@ -6,6 +6,7 @@
 [core]
 	excludesfile = /Users/rfranke/.gitignore_global
 	commentchar = ";"
+	autocrlf = input
 [credential]
 	helper = osxkeychain
 
@@ -46,3 +47,5 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[init]
+	defaultBranch = main
