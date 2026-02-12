@@ -72,7 +72,19 @@ export FZF_BASE=/usr/bin
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(bundler fzf git rails zoxide zsh-vi-mode)
+plugins=(
+  bundler 
+  fzf 
+  git 
+  git-to-jj
+  jj
+  rails 
+  ruby
+  zoxide 
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-vi-mode
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -143,6 +155,9 @@ function y() {
 open() {
   xdg-open "$@" >/dev/null 2>&1 &
 }
+
+# Git
+alias glog='git log --pretty=format:"%C(yellow)%h%Creset %C(green)%ad%Creset %s %C(dim white)(%an <%ae>)%Creset" --date=short --decorate --graph'
 ################################################################################
 
 ################################################################################
@@ -170,6 +185,14 @@ fi
 if command -v try &> /dev/null; then
   eval "$(try init ~/Work/tries)"
 fi
+################################################################################
+
+################################################################################
+# Initialize fzf to work in combination with zsh-vi-mode
+################################################################################
+function zvm_after_init() {
+  source <(fzf --zsh)
+}
 ################################################################################
 
 ################################################################################
