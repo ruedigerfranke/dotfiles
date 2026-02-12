@@ -163,7 +163,7 @@ alias glog='git log --pretty=format:"%C(yellow)%h%Creset %C(green)%ad%Creset %s 
 ################################################################################
 # Additional environment variables
 ################################################################################
-export PATH=./bin:$PATH
+export PATH=./bin:~/.cargo/bin:$PATH
 ################################################################################
 
 
