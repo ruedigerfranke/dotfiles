@@ -175,8 +175,9 @@ alias gbc="gitbatch -d ~/Workspace/Taktsoft/wlp.cloud"
 
 alias vagrant='sudo vagrant "$@"'
 
-alias devcup='devcontainer up --workspace-folder .'
-alias devcdn='docker compose -f .devcontainer/compose.yaml down'
+if [[ -f "$HOME/.config/zsh/devcontainer.zsh" ]]; then
+  source "$HOME/.config/zsh/devcontainer.zsh"
+fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
