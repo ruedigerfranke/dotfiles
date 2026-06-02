@@ -39,7 +39,7 @@
   "context_servers": {
     "mcp-server-context7": {
       "settings": {
-        "context7_api_key": "{{ .context7_api_key }}"
+        "context7_api_key": "{{ onepasswordRead "op://Personal/Context7/context7_api_key" }}"
       }
     }
   },
