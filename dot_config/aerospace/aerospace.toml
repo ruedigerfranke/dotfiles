@@ -122,6 +122,11 @@ ctrl-alt-down = 'move down'
 ctrl-alt-up = 'move up'
 ctrl-alt-right = 'move right'
 
+ctrl-shift-h = 'join-with left'
+ctrl-shift-j = 'join-with down'
+ctrl-shift-k = 'join-with up'
+ctrl-shift-l = 'join-with right'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 ctrl-minus = 'resize smart -50'
 ctrl-equal = 'resize smart +50'
