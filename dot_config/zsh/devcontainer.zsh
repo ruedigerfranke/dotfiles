@@ -89,7 +89,11 @@ _devcontainer_compose() {
 
     for candidate in \
       "${devcontainer_dir}/compose.yaml" \
-      "${devcontainer_dir}/compose.yml"; do
+      "${devcontainer_dir}/compose.yml" \
+      "${repo_root}/docker-compose.yaml" \
+      "${repo_root}/docker-compose.yml" \
+      "${devcontainer_dir}/docker-compose.yaml" \
+      "${devcontainer_dir}/docker-compose.yml"; do
       if [[ -f "$candidate" ]]; then
         base_compose_file="$candidate"
         break
@@ -106,12 +110,30 @@ _devcontainer_compose() {
     for override_file in \
       "${devcontainer_dir}/compose.override.yaml" \
       "${devcontainer_dir}/compose.override.yml" \
+      "${devcontainer_dir}/compose.overrides.yaml" \
+      "${devcontainer_dir}/compose.overrides.yml" \
       "${devcontainer_dir}/compose-override.yaml" \
-      "${devcontainer_dir}/compose-override.yml"; do
-      if [[ -f "$override_file" ]]; then
+      "${devcontainer_dir}/compose-override.yml" \
+      "${devcontainer_dir}/compose-overrides.yaml" \
+      "${devcontainer_dir}/compose-overrides.yml" \
+      "${devcontainer_dir}/docker-compose.override.yaml" \
+      "${devcontainer_dir}/docker-compose.override.yml" \
+      "${devcontainer_dir}/docker-compose-overrides.yaml" \
+      "${devcontainer_dir}/docker-compose-overrides.yml"; do
+      if [[ -f "$override_file" && "$override_file" != "$base_compose_file" ]]; then
         compose_args+=(-f "$override_file")
       fi
     done
+
+    if [[ "$base_compose_file" == "${repo_root}/docker-compose.yaml" || "$base_compose_file" == "${repo_root}/docker-compose.yml" ]]; then
+      for override_file in \
+        "${devcontainer_dir}/docker-compose.yaml" \
+        "${devcontainer_dir}/docker-compose.yml"; do
+        if [[ -f "$override_file" ]]; then
+          compose_args+=(-f "$override_file")
+        fi
+      done
+    fi
 
     cd "$repo_root" || return 1
     docker compose "${compose_args[@]}" "$compose_command" "$@"
