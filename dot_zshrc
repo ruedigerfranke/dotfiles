@@ -154,7 +154,6 @@ if command -v zoxide &> /dev/null; then
     fi
   }
   alias cd=zd
-  alias z=zd
 fi
 
 alias ..='cd ..'

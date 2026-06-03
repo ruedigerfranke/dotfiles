@@ -35,7 +35,6 @@ devup() {
 
   devcontainer up \
     --workspace-folder "$workspace" \
-    --remove-existing-container \
     --mount "type=bind,source=$_devcontainer_ssh_socket,target=$_devcontainer_ssh_target" \
     --remote-env SSH_AUTH_SOCK=$_devcontainer_ssh_target
 }
