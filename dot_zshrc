@@ -266,7 +266,6 @@ compinit
 eval "$(try init ~/Work/tries)"
 eval "$(atuin init zsh)"
 
-# Redmine CLI via 1Password
-redmine() {
-  op --env-file="${HOME}/.config/op/env.redmine" run -- redmine-cli "$@"
-}
+if [[ -f "$HOME/.config/zsh/redmine.zsh" ]]; then
+  source "$HOME/.config/zsh/redmine.zsh"
+fi
