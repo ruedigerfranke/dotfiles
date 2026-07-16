@@ -3,6 +3,24 @@
 _devcontainer_ssh_socket="/run/host-services/ssh-auth.sock"
 _devcontainer_ssh_target="/tmp/ssh-agent.sock"
 
+# Parse an optional leading `-w <path>` workspace flag from the given args.
+# Sets _devcontainer_workspace (default ".") and _devcontainer_shift (number of
+# args consumed, 0 or 2). Returns non-zero when `-w` is given without a value so
+# callers can abort before shifting.
+_devcontainer_parse_workspace() {
+  _devcontainer_workspace="."
+  _devcontainer_shift=0
+
+  if [[ "$1" == "-w" ]]; then
+    if [[ -z "$2" ]]; then
+      echo "-w requires a workspace path" >&2
+      return 1
+    fi
+    _devcontainer_workspace="$2"
+    _devcontainer_shift=2
+  fi
+}
+
 devcheck() {
   if ! command -v colima >/dev/null 2>&1; then
     echo "colima not found" >&2
@@ -29,7 +47,9 @@ devcheck() {
 }
 
 devup() {
-  local workspace="${1:-.}"
+  _devcontainer_parse_workspace "$@" || return 1
+  shift $_devcontainer_shift
+  local workspace="$_devcontainer_workspace"
 
   devcheck || return $?
 
@@ -40,16 +60,14 @@ devup() {
 }
 
 devexec() {
-  local workspace="."
-
-  if [[ $# -gt 0 ]]; then
-    workspace="$1"
-    shift
-  fi
+  _devcontainer_parse_workspace "$@" || return 1
+  shift $_devcontainer_shift
+  local workspace="$_devcontainer_workspace"
 
   if [[ $# -eq 0 ]]; then
-    echo "Usage: devexec <workspace> <command> [args...]" >&2
-    echo "Example: devexec . git fetch" >&2
+    echo "Usage: devexec [-w <workspace>] <command> [args...]" >&2
+    echo "Example: devexec git fetch" >&2
+    echo "         devexec -w ~/projects/foo git fetch" >&2
     return 1
   fi
 
@@ -62,20 +80,19 @@ devexec() {
 }
 
 devsshkeys() {
-  local workspace="${1:-.}"
+  _devcontainer_parse_workspace "$@" || return 1
+  local workspace="$_devcontainer_workspace"
 
-  devexec "$workspace" ssh-add -l
+  devexec -w "$workspace" ssh-add -l
 }
 
 _devcontainer_compose() {
-  local workspace="."
   local compose_command="$1"
   shift
 
-  if [[ $# -gt 0 ]]; then
-    workspace="$1"
-    shift
-  fi
+  _devcontainer_parse_workspace "$@" || return 1
+  shift $_devcontainer_shift
+  local workspace="$_devcontainer_workspace"
 
   (
     cd "$workspace" || return 1
