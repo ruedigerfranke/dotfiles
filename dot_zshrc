@@ -269,3 +269,7 @@ eval "$(atuin init zsh)"
 if [[ -f "$HOME/.config/zsh/redmine.zsh" ]]; then
   source "$HOME/.config/zsh/redmine.zsh"
 fi
+
+if [[ -f "$HOME/.config/zsh/herdr-title.zsh" ]]; then
+  source "$HOME/.config/zsh/herdr-title.zsh"
+fi
