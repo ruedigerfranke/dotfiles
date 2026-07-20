@@ -81,8 +81,6 @@ plugins=(
     fzf
     fzf-alias
     git
-    git-to-jj
-    jj
     rails
     ruby
     ssh
