@@ -260,8 +260,6 @@ autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
-# try - https://github.com/tobi/try
-eval "$(try init ~/Work/tries)"
 eval "$(atuin init zsh)"
 
 if [[ -f "$HOME/.config/zsh/redmine.zsh" ]]; then
@@ -271,3 +269,6 @@ fi
 if [[ -f "$HOME/.config/zsh/herdr-title.zsh" ]]; then
   source "$HOME/.config/zsh/herdr-title.zsh"
 fi
+
+# try-rs integration
+source '/Users/rfranke/Library/Application Support/try-rs/try-rs.zsh'
