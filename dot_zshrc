@@ -266,9 +266,6 @@ if [[ -f "$HOME/.config/zsh/redmine.zsh" ]]; then
   source "$HOME/.config/zsh/redmine.zsh"
 fi
 
-if [[ -f "$HOME/.config/zsh/herdr-title.zsh" ]]; then
-  source "$HOME/.config/zsh/herdr-title.zsh"
-fi
 
 # try-rs integration
 source '/Users/rfranke/Library/Application Support/try-rs/try-rs.zsh'
