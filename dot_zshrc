@@ -273,3 +273,7 @@ fi
 
 # try-rs integration
 source '/Users/rfranke/Library/Application Support/try-rs/try-rs.zsh'
+
+if [[ -r /opt/homebrew/lib/libsk-libfido2.dylib ]]; then
+  export SSH_SK_PROVIDER=/opt/homebrew/lib/libsk-libfido2.dylib
+fi
