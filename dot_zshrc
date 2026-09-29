@@ -176,6 +176,10 @@ if [[ -f "$HOME/.config/zsh/devcontainer.zsh" ]]; then
   source "$HOME/.config/zsh/devcontainer.zsh"
 fi
 
+if [[ -f "$HOME/.config/zsh/encorecloud.zsh" ]]; then
+  source "$HOME/.config/zsh/encorecloud.zsh"
+fi
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 # __conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
